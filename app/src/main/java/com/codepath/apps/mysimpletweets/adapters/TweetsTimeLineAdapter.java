@@ -19,7 +19,7 @@ import java.util.List;
  */
 public class TweetsTimeLineAdapter extends ArrayAdapter<Tweet> {
     public TweetsTimeLineAdapter(Context context, List<Tweet> tweets) {
-        super(context, android.R.layout.simple_list_item_1, tweets);
+        super(context, R.layout.item_tweet, tweets);
     }
 
 
@@ -34,7 +34,10 @@ public class TweetsTimeLineAdapter extends ArrayAdapter<Tweet> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_tweet, parent, false);
         }
 
-        TextView tvScreenName = (TextView) convertView.findViewById(R.id.tvMyScreenName);
+        TextView tvUserName = (TextView) convertView.findViewById(R.id.tvMyUserNameHome);
+        TextView tvScreenName = (TextView) convertView.findViewById(R.id.tvMyScreenNameHome);
+
+
         TextView tvTweetBody = (TextView) convertView.findViewById(R.id.tvTweetBody);
         TextView tvRelTime = (TextView) convertView.findViewById(R.id.tvRelTime);
 
@@ -42,12 +45,15 @@ public class TweetsTimeLineAdapter extends ArrayAdapter<Tweet> {
 
        // String temp = tweet.getRelativeTimeAgo(tweet.getCreatedAt());
 
-        tvScreenName.setText(tweet.getUser().getScreenName()+"");
+        tvScreenName.setText(" @"+tweet.getUser().getScreenName());
+        tvUserName.setText(tweet.getUser().getName()+"");
         tvTweetBody.setText(tweet.getBody());
-        tvRelTime.setText(tweet.getRelativeTimeAgo(tweet.getCreatedAt()));
+        tvRelTime.setText(Tweet.getShowTime(tweet.getCreatedAt()));
         ivProfilePic.setImageResource(0);
 
-        Picasso.with(getContext()).load(tweet.getUser().getProfileImageUrl()).into(ivProfilePic);
+        String profileUrl =tweet.getUser().getProfileImageUrl();
+        String biggerProfileUrl= profileUrl.replace("normal","bigger");
+        Picasso.with(getContext()).load(biggerProfileUrl).into(ivProfilePic);
 
         return convertView;
     }

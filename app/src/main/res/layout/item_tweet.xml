@@ -7,7 +7,7 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:id="@+id/ivProfilePic"
-        android:paddingRight="10dp"
+        android:paddingRight="5dp"
         android:scaleType="fitXY"
         android:adjustViewBounds="true"
         android:layout_alignParentTop="true"
@@ -19,13 +19,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="User Name"
+        android:textStyle="bold"
         android:paddingBottom="5sp"
-        android:paddingLeft="20sp"
-        android:id="@+id/tvMyScreenName"
+        android:paddingLeft="5sp"
+        android:id="@+id/tvMyUserNameHome"
         android:layout_toRightOf="@+id/ivProfilePic"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentTop="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -33,8 +32,8 @@
         android:text="Tweet Body"
         android:id="@+id/tvTweetBody"
         android:autoLink="all"
-        android:paddingLeft="20sp"
-        android:layout_below="@+id/tvMyScreenName"
+        android:paddingLeft="5sp"
+        android:layout_below="@+id/tvMyUserNameHome"
         android:ellipsize="end"
         android:layout_toRightOf="@+id/ivProfilePic"
         android:layout_alignParentRight="true"
@@ -46,9 +45,22 @@
         android:layout_height="wrap_content"
         android:text="Time Passed"
         android:id="@+id/tvRelTime"
-        android:paddingRight="10sp"
+        android:paddingRight="5sp"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_above="@+id/tvTweetBody" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Screen Name"
+        android:id="@+id/tvMyScreenNameHome"
+        android:paddingLeft="5sp"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/tvMyUserNameHome"
+        android:layout_alignBottom="@+id/tvMyUserNameHome"
+        android:layout_toLeftOf="@+id/tvRelTime"
+        android:layout_toStartOf="@+id/tvRelTime" />
+
 </RelativeLayout>

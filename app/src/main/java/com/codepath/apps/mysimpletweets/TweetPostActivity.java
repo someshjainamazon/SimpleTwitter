@@ -1,22 +1,19 @@
 package com.codepath.apps.mysimpletweets;
 
-import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.AttributeSet;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.codepath.apps.mysimpletweets.models.Tweet;
 import com.codepath.apps.mysimpletweets.models.User;
-import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.squareup.picasso.Picasso;
 
@@ -34,6 +31,7 @@ public class TweetPostActivity extends ActionBarActivity {
     private TextView tvScreenName;
     private EditText etTweetPost;
     private TwitterClient twitterClient;
+    private TextView tvNumChars;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,12 +45,31 @@ public class TweetPostActivity extends ActionBarActivity {
         actionBar.setTitle("Tweet Post");*/
         myHandle = getIntent().getParcelableExtra("personalDetails");
         ivMyProfile=(ImageView)findViewById(R.id.ivMyImage);
-        tvScreenName=(TextView)findViewById(R.id.tvMyScreenName);
+        tvScreenName=(TextView)findViewById(R.id.tvMyUserNameHome);
         etTweetPost = (EditText) findViewById(R.id.etTweet);
+        tvScreenName=(TextView)findViewById(R.id.tvMyUserNameHome);
+        tvNumChars = (TextView) findViewById(R.id.tvCharLimit);
 
         tvScreenName.setText(myHandle.getScreenName());
         Picasso.with(TweetPostActivity.this).load(myHandle.getProfileImageUrl()).into(ivMyProfile);
 
+
+        etTweetPost.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                tvNumChars.setText((140 - s.length())+"");
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
 
 

@@ -2,6 +2,7 @@ package com.codepath.apps.mysimpletweets;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -13,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
 
+import com.codepath.apps.mysimpletweets.adapters.TweetCursorAdapter;
 import com.codepath.apps.mysimpletweets.adapters.TweetsTimeLineAdapter;
 import com.codepath.apps.mysimpletweets.listeners.EndlessScrollListener;
 import com.codepath.apps.mysimpletweets.models.Tweet;
@@ -36,6 +38,7 @@ public class TimelineActivity extends ActionBarActivity {
     private User myHandle;
     public static final int  REQUEST_RESULT=50;
     private SwipeRefreshLayout swipeContainer;
+    private TweetCursorAdapter tweetCursorAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +55,12 @@ public class TimelineActivity extends ActionBarActivity {
         tweetList = new ArrayList<Tweet>();
         timelineAdapter = new TweetsTimeLineAdapter(this, tweetList);
         lvTweets.setAdapter(timelineAdapter);
+
+
+        /*Cursor tweetCursor = Tweet.fetchResultCursor();
+        tweetCursorAdapter = new TweetCursorAdapter(this, tweetCursor);
+        lvTweets.setAdapter(tweetCursorAdapter);*/
+
 
         getPersonalDetails();
         populateTimeline();
@@ -112,8 +121,9 @@ public class TimelineActivity extends ActionBarActivity {
                 public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
 
                     timelineAdapter.addAll(Tweet.constructArrayFromJsonTweets(response));
-
+                    //tweetList = Tweet.constructArrayFromJsonTweets(response);
                     max_id = tweetList.get(tweetList.size() - 1).getUid();
+                    //tweetCursorAdapter.notifyDataSetChanged();
                     swipeContainer.setRefreshing(false);
 
                 }
@@ -137,8 +147,9 @@ public class TimelineActivity extends ActionBarActivity {
                 public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
 
                     timelineAdapter.addAll(Tweet.constructArrayFromJsonTweets(response));
+                    //tweetList =Tweet.constructArrayFromJsonTweets(response);
                     System.out.println("hello");
-
+                    //tweetCursorAdapter.notifyDataSetChanged();
                     max_id = tweetList.get(tweetList.size() - 1).getUid();
                     swipeContainer.setRefreshing(false);
 

@@ -7,6 +7,7 @@ import android.os.Parcelable;
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
+import com.activeandroid.query.Select;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -26,7 +27,7 @@ public class User extends Model implements Parcelable {
     @Column(name = "user_id")
     private long uid;
 
-    @Column(name = "screename", unique = true)
+    @Column(name = "screename")
     private String screenName;
 
     public String getProfileImageUrl() {
@@ -72,7 +73,10 @@ public class User extends Model implements Parcelable {
             user.screenName = jsonObject.getString("screen_name");
             user.uid = jsonObject.getLong("id");
             user.profileImageUrl=jsonObject.getString("profile_image_url");
-            user.save();
+
+
+            User existingUser =new Select().from(User.class).where("screename = ?", user.screenName).executeSingle();
+            if(existingUser==null)user.save();
         } catch (JSONException e) {
             e.printStackTrace();
         }

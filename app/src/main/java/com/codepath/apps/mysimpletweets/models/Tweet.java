@@ -1,12 +1,15 @@
 package com.codepath.apps.mysimpletweets.models;
 
+import android.database.Cursor;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.format.DateUtils;
 
+import com.activeandroid.Cache;
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
+import com.activeandroid.query.Select;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -175,7 +178,7 @@ public class Tweet extends Model implements Parcelable{
 
 
     // getRelativeTimeAgo("Mon Apr 01 21:16:23 +0000 2014");
-    public String getRelativeTimeAgo(String rawJsonDate) {
+    public static String getRelativeTimeAgo(String rawJsonDate) {
         String twitterFormat = "EEE MMM dd HH:mm:ss ZZZZZ yyyy";
         SimpleDateFormat sf = new SimpleDateFormat(twitterFormat, Locale.ENGLISH);
         sf.setLenient(true);
@@ -192,7 +195,45 @@ public class Tweet extends Model implements Parcelable{
         return relativeDate;
     }
 
+    public static String getShowTime(String rawJSonDate){
+        String relTime = getRelativeTimeAgo(rawJSonDate);
+        String timeNumber=null;
+        String timeUnit=null;
+        String[] parts = relTime.split(" ");
+
+
+        if(relTime.contains(" ago")){
+                timeNumber=parts[0];
+                if (parts[1].contains("sec")) timeUnit = "sec";
+                else if (parts[1].contains("min")) timeUnit = "min";
+                else timeUnit = "hrs";
+
+                return timeNumber + timeUnit;
+        }
+        else if(relTime.contains("in ")) {
+            timeNumber = parts[1];
+            if (parts[2].contains("sec")) timeUnit = "sec";
+            else if (parts[2].contains("min")) timeUnit = "min";
+            else timeUnit = "hrs";
+
+            return timeNumber + timeUnit;
+        }
+
+        return null;
+    }
+
+
     public Tweet(){
         super();
+    }
+
+    public static Cursor fetchResultCursor() {
+        String tableName = Cache.getTableInfo(Tweet.class).getTableName();
+        // Query all items without any conditions
+        String resultRecords = new Select(tableName + ".*, " + tableName + ".Id as _id").
+                from(Tweet.class).toSql();
+        // Execute query on the underlying ActiveAndroid SQLite database
+        Cursor resultCursor = Cache.openDatabase().rawQuery(resultRecords, null);
+        return resultCursor;
     }
 }

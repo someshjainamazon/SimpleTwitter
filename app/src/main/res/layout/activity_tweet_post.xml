@@ -33,6 +33,18 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="140"
+            android:gravity="center"
+            android:paddingRight="10sp"
+            android:id="@+id/tvCharLimit"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/btnTweet"
+            android:layout_toStartOf="@+id/btnTweet"
+            android:layout_alignParentBottom="true" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -58,7 +70,7 @@
             android:layout_height="wrap_content"
             android:text="New Text"
             android:paddingLeft="20sp"
-            android:id="@+id/tvMyScreenName"
+            android:id="@+id/tvMyUserName"
             android:gravity="center"
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@+id/ivMyImage"
