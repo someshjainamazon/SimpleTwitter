@@ -1,13 +1,16 @@
 package com.codepath.apps.mysimpletweets;
 
 import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -40,9 +43,7 @@ public class TweetPostActivity extends ActionBarActivity {
         twitterClient = TwitterApp.getRestClient(); // singleton client
 
 
-        /*ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayShowTitleEnabled(true); 
-        actionBar.setTitle("Tweet Post");*/
+
         myHandle = getIntent().getParcelableExtra("personalDetails");
         ivMyProfile=(ImageView)findViewById(R.id.ivMyImage);
         tvScreenName=(TextView)findViewById(R.id.tvMyUserName);
@@ -78,6 +79,8 @@ public class TweetPostActivity extends ActionBarActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_tweet_post, menu);
+
+
         return true;
     }
 

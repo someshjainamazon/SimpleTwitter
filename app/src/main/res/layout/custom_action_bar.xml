@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content" android:layout_height="wrap_content"
+    android:background="#21D3FF">
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/ivIcon"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+
+        android:background="@drawable/icon_twitter"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Home"
+        android:textColor="#000"
+        android:textStyle="bold"
+        android:id="@+id/tvHomeTitle"
+        android:gravity="center"
+        android:paddingLeft="10sp"
+        android:layout_alignBottom="@+id/ivIcon"
+        android:layout_toRightOf="@+id/ivIcon"
+        android:layout_alignParentTop="true" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/feather_icon"
+        android:id="@+id/btnCompose"
+        android:paddingRight="50sp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignBottom="@+id/tvHomeTitle" />
+
+
+    <!--
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/ivIcon"
+        android:layout_toEndOf="@+id/ivIcon"
+        android:layout_alignBottom="@+id/ivIcon">
+
+        <EditText
+            android:id="@+id/calc_txt_Prise"
+            android:layout_width="332dp"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:layout_marginTop="20dp"
+            android:textSize="25dp"
+            android:textColor="@color/material_blue_grey_800"
+            android:textStyle="bold"
+            android:hint="Enter Query"
+            android:singleLine="true" />
+
+        <Button
+            android:id="@+id/calc_clear_txt_Prise"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_gravity="right|center_vertical"
+            android:background="@drawable/abc_ic_clear_mtrl_alpha" />
+
+    </FrameLayout>-->
+
+</RelativeLayout>

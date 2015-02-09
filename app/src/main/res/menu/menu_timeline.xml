@@ -4,5 +4,5 @@
     tools:context="com.codepath.apps.mysimpletweets.TimelineActivity">
     <item android:id="@+id/action_settings" android:title="@string/action_settings"
         android:icon="@drawable/compose_icon"
-        android:orderInCategory="100" app:showAsAction="always" />
+        android:orderInCategory="100" app:showAsAction="never" />
 </menu>

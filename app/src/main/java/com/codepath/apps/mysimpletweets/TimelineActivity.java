@@ -3,6 +3,7 @@ package com.codepath.apps.mysimpletweets;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -10,8 +11,11 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.codepath.apps.mysimpletweets.adapters.TweetCursorAdapter;
@@ -45,9 +49,21 @@ public class TimelineActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline);
 
-        ActionBar actionBar = getSupportActionBar();
+        /*ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(true);
-        actionBar.setTitle("@someshjain1");
+        actionBar.setTitle("@someshjain1");*/
+
+
+
+        final ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayShowHomeEnabled(false);
+        actionBar.setDisplayShowTitleEnabled(false);
+        actionBar.setDisplayShowCustomEnabled(true);
+        actionBar.setCustomView(R.layout.custom_action_bar);
+        actionBar.setBackgroundDrawable(new ColorDrawable(0xFF21D3FF));
+
+
+
 
         twitterClient = TwitterApp.getRestClient(); // singleton client
         lvTweets = (ListView) findViewById(R.id.lvTweets);
@@ -55,6 +71,20 @@ public class TimelineActivity extends ActionBarActivity {
         tweetList = new ArrayList<Tweet>();
         timelineAdapter = new TweetsTimeLineAdapter(this, tweetList);
         lvTweets.setAdapter(timelineAdapter);
+
+
+        final Button btnPost = (Button) findViewById(R.id.btnCompose);
+        btnPost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(TimelineActivity.this, TweetPostActivity.class);
+                i.putExtra("personalDetails", myHandle);
+                startActivityForResult(i, REQUEST_RESULT);
+
+            }
+        });
+
+
 
 
         /*tweetCursor= Tweet.fetchResultCursor();
@@ -165,19 +195,34 @@ public class TimelineActivity extends ActionBarActivity {
     }
 
 
-    @Override
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_timeline, menu);
+
+
+        final Button btnPost = (Button) findViewById(R.id.btnCompose);
+        btnPost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(TimelineActivity.this, TweetPostActivity.class);
+                i.putExtra("personalDetails", myHandle);
+                startActivityForResult(i, REQUEST_RESULT);
+
+            }
+        });
+
+
+
         return true;
-    }
+    }*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        /*int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
@@ -186,7 +231,7 @@ public class TimelineActivity extends ActionBarActivity {
             startActivityForResult(i, REQUEST_RESULT);
 
             return true;
-        }
+        }*/
 
         return super.onOptionsItemSelected(item);
     }

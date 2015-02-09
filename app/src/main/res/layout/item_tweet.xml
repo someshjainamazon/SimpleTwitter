@@ -9,6 +9,8 @@
         android:id="@+id/ivProfilePic"
         android:paddingRight="5dp"
         android:scaleType="fitXY"
+        android:padding="3dp"
+        android:background="@drawable/border"
         android:adjustViewBounds="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"

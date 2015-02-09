@@ -211,17 +211,17 @@ public class Tweet extends Model implements Parcelable{
 
         if(relTime.contains(" ago")){
                 timeNumber=parts[0];
-                if (parts[1].contains("sec")) timeUnit = "sec";
-                else if (parts[1].contains("min")) timeUnit = "min";
-                else timeUnit = "hrs";
+                if (parts[1].contains("sec")) timeUnit = "s";
+                else if (parts[1].contains("min")) timeUnit = "m";
+                else timeUnit = "h";
 
                 return timeNumber + timeUnit;
         }
         else if(relTime.contains("in ")) {
             timeNumber = parts[1];
-            if (parts[2].contains("sec")) timeUnit = "sec";
-            else if (parts[2].contains("min")) timeUnit = "min";
-            else timeUnit = "hrs";
+            if (parts[2].contains("sec")) timeUnit = "s";
+            else if (parts[2].contains("min")) timeUnit = "m";
+            else timeUnit = "h";
 
             return timeNumber + timeUnit;
         }
