@@ -41,13 +41,12 @@ public class TweetPostActivity extends ActionBarActivity {
 
 
         /*ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayShowTitleEnabled(true);
+        actionBar.setDisplayShowTitleEnabled(true); 
         actionBar.setTitle("Tweet Post");*/
         myHandle = getIntent().getParcelableExtra("personalDetails");
         ivMyProfile=(ImageView)findViewById(R.id.ivMyImage);
-        tvScreenName=(TextView)findViewById(R.id.tvMyUserNameHome);
+        tvScreenName=(TextView)findViewById(R.id.tvMyUserName);
         etTweetPost = (EditText) findViewById(R.id.etTweet);
-        tvScreenName=(TextView)findViewById(R.id.tvMyUserNameHome);
         tvNumChars = (TextView) findViewById(R.id.tvCharLimit);
 
         tvScreenName.setText(myHandle.getScreenName());

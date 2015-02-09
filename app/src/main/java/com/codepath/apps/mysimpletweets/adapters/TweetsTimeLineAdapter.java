@@ -51,9 +51,9 @@ public class TweetsTimeLineAdapter extends ArrayAdapter<Tweet> {
         tvRelTime.setText(Tweet.getShowTime(tweet.getCreatedAt()));
         ivProfilePic.setImageResource(0);
 
-        String profileUrl =tweet.getUser().getProfileImageUrl();
-        String biggerProfileUrl= profileUrl.replace("normal","bigger");
-        Picasso.with(getContext()).load(biggerProfileUrl).into(ivProfilePic);
+        //String profileUrl =tweet.getUser().getProfileImageUrl();
+        //String biggerProfileUrl= profileUrl.replace("normal","bigger");
+        Picasso.with(getContext()).load(tweet.getUser().getProfileImageUrl()).into(ivProfilePic);
 
         return convertView;
     }

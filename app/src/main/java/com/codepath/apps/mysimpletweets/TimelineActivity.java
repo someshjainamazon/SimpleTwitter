@@ -39,7 +39,7 @@ public class TimelineActivity extends ActionBarActivity {
     public static final int  REQUEST_RESULT=50;
     private SwipeRefreshLayout swipeContainer;
     private TweetCursorAdapter tweetCursorAdapter;
-
+    Cursor tweetCursor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +57,7 @@ public class TimelineActivity extends ActionBarActivity {
         lvTweets.setAdapter(timelineAdapter);
 
 
-        /*Cursor tweetCursor = Tweet.fetchResultCursor();
+        /*tweetCursor= Tweet.fetchResultCursor();
         tweetCursorAdapter = new TweetCursorAdapter(this, tweetCursor);
         lvTweets.setAdapter(tweetCursorAdapter);*/
 
@@ -97,7 +97,7 @@ public class TimelineActivity extends ActionBarActivity {
                 public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
 
                     myHandle = User.fromJson(response);
-                    System.out.println(myHandle);
+                    System.out.println(myHandle.getScreenName());
                     System.out.println("hello");
 
                 }
@@ -148,7 +148,7 @@ public class TimelineActivity extends ActionBarActivity {
 
                     timelineAdapter.addAll(Tweet.constructArrayFromJsonTweets(response));
                     //tweetList =Tweet.constructArrayFromJsonTweets(response);
-                    System.out.println("hello");
+                    //System.out.println("hello");
                     //tweetCursorAdapter.notifyDataSetChanged();
                     max_id = tweetList.get(tweetList.size() - 1).getUid();
                     swipeContainer.setRefreshing(false);

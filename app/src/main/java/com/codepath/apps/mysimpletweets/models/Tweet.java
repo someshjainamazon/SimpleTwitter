@@ -10,6 +10,7 @@ import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 import com.activeandroid.query.Select;
+import com.activeandroid.util.SQLiteUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -17,6 +18,7 @@ import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -86,7 +88,7 @@ public class Tweet extends Model implements Parcelable{
     @Column(name="body")
     private String body;
 
-    @Column(name = "uid", unique = true, onUniqueConflict = Column.ConflictAction.REPLACE)
+    @Column(name = "uid")//, unique = true, onUniqueConflict = Column.ConflictAction.REPLACE)
     private long uid;
 
 
@@ -96,6 +98,11 @@ public class Tweet extends Model implements Parcelable{
 
     @Column(name="createTime")
     private String createdAt;
+
+    // This is the unique id given by the server
+    //@Column(name = "remote_id", unique = true, onUniqueConflict = Column.ConflictAction.REPLACE)
+    //public long remoteId;
+
 
 
 
@@ -115,7 +122,7 @@ public class Tweet extends Model implements Parcelable{
             tweet.uid=jsonObject.getLong("id");
             tweet.createdAt=jsonObject.getString("created_at");
             tweet.user=User.fromJson(jsonObject.getJSONObject("user"));
-            tweet.save();
+            //tweet.save();
             return tweet;
         } catch (JSONException e) {
             e.printStackTrace();
@@ -229,11 +236,38 @@ public class Tweet extends Model implements Parcelable{
 
     public static Cursor fetchResultCursor() {
         String tableName = Cache.getTableInfo(Tweet.class).getTableName();
+        System.out.println("i am here");
         // Query all items without any conditions
         String resultRecords = new Select(tableName + ".*, " + tableName + ".Id as _id").
                 from(Tweet.class).toSql();
         // Execute query on the underlying ActiveAndroid SQLite database
         Cursor resultCursor = Cache.openDatabase().rawQuery(resultRecords, null);
+        System.out.println("!!!!"+resultCursor.toString());
         return resultCursor;
+    }
+
+    public static Cursor fetchUser(String createTime) {
+        String tableName = Cache.getTableInfo(Tweet.class).getTableName();
+        // Query all items without any conditions
+        /*String resultRecords = new Select("User").
+                from(Tweet.class).where("createTime = ?",createTime).toSql();
+        // Execute query on the underlying ActiveAndroid SQLite database
+        Cursor resultCursor = Cache.openDatabase().rawQuery(resultRecords, null);*/
+
+
+        List<User> users = SQLiteUtils.rawQuery(Tweet.class, "SELECT User from Tweet", null);
+
+        /*List<TodoItem> importantItems =
+  SQLiteUtils.rawQuery(TodoItem.class,
+     "SELECT * from todo_items where priority = ?",
+     new String[] { "high" });
+        * */
+
+
+                 //int count =resultCursor.getCount();
+        //System.out.println(count+"");
+        //return resultCursor;
+
+        return null;
     }
 }

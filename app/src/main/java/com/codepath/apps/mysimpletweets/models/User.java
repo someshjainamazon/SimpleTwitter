@@ -30,6 +30,11 @@ public class User extends Model implements Parcelable {
     @Column(name = "screename")
     private String screenName;
 
+    // This is the unique id given by the server
+    //@Column(name = "remote_id", unique = true)
+    //public long remoteId;
+
+
     public String getProfileImageUrl() {
         return profileImageUrl;
     }
@@ -67,16 +72,16 @@ public class User extends Model implements Parcelable {
 
     public static User fromJson(JSONObject jsonObject){
         User user = new User();
-
         try {
             user.name = jsonObject.getString("name");
             user.screenName = jsonObject.getString("screen_name");
             user.uid = jsonObject.getLong("id");
             user.profileImageUrl=jsonObject.getString("profile_image_url");
-
-
-            User existingUser =new Select().from(User.class).where("screename = ?", user.screenName).executeSingle();
-            if(existingUser==null)user.save();
+            /*existingUser =new Select().from(User.class).where("screename = ?", user.screenName).executeSingle();
+            if(existingUser==null){
+                user.save();
+                existingUser= new Select().from(User.class).where("screename = ?", user.screenName).executeSingle();
+            }*/
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -127,8 +132,16 @@ public class User extends Model implements Parcelable {
 
     // Used to return items from another table based on the foreign key
 
-    public List<User> items() {
-        return getMany(User.class, "User");
+    public List<Tweet> items() {
+        return getMany(Tweet.class, "User");
+    }
+
+    public static User getUserFromTweet(long uid){
+        return new Select()
+                .from(Tweet.class)
+                .where("uid = ?", uid)
+                .executeSingle();
+
     }
 
 
