@@ -11,4 +11,6 @@ I have implemented the following functionalities :
 6. Swipe Refresh.
 7. User can see counter of the number of characters left.
 
+![Alt text](https://github.com/someshjainiitkgp/SimpleTwitter/blob/master/twitterVideo.gif "Twitter Stream")
+
 
