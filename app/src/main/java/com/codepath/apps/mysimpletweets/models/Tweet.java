@@ -26,38 +26,6 @@ import java.util.Locale;
  */
 
 
-/*
-* "text": "just another test",
-    "contributors": null,
-    "id": 240558470661799936,
-    "retweet_count": 0,
-    "in_reply_to_status_id_str": null,
-    "geo": null,
-    "retweeted": false,
-    "in_reply_to_user_id": null,
-    "place": null,
-    "source": "<a href="//realitytechnicians.com\"" rel="\"nofollow\"">OAuth Dancer Reborn</a>",
-    "user": {
-      "name": "OAuth Dancer",
-      "profile_sidebar_fill_color": "DDEEF6",
-      "profile_background_tile": true,
-      "profile_sidebar_border_color": "C0DEED",
-      "profile_image_url": "http://a0.twimg.com/profile_images/730275945/oauth-dancer_normal.jpg",
-      "created_at": "Wed Mar 03 19:37:35 +0000 2010",
-      "location": "San Francisco, CA",
-      "follow_request_sent": false,
-      "id_str": "119476949",
-      "is_translator": false,
-      "profile_link_color": "0084B4",
-      "entities": {
-        "url": {
-          "urls": [
-            {
-              "expanded_url": null,
-              "url": "http://bit.ly/oauth-dancer",
-              "indices": [
-                0,*/
-
 @Table(name="Tweet")
 public class Tweet extends Model implements Parcelable{
     public String getBody() {
@@ -92,27 +60,53 @@ public class Tweet extends Model implements Parcelable{
     private long uid;
 
 
-    @Column(name = "User", onUpdate = Column.ForeignKeyAction.CASCADE, onDelete = Column.ForeignKeyAction.CASCADE)
-    private User user;
-
-
     @Column(name="createTime")
     private String createdAt;
 
-    // This is the unique id given by the server
-    //@Column(name = "remote_id", unique = true, onUniqueConflict = Column.ConflictAction.REPLACE)
-    //public long remoteId;
 
-
-
-
-    public User getUser() {
-        return user;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
+
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
+    }
+
+    public String getScreenName() {
+        return screenName;
+    }
+
+    public void setScreenName(String screenName) {
+        this.screenName = screenName;
+    }
+
+    public String getProfileImageUrl() {
+        return profileImageUrl;
+    }
+
+    public void setProfileImageUrl(String profileImageUrl) {
+        this.profileImageUrl = profileImageUrl;
+    }
+
+    @Column(name = "username")
+    private String userName;
+
+    @Column(name = "user_id")
+    private long userId;
+
+    @Column(name = "screename")
+    private String screenName;
+
+    @Column(name = "profileUrl")
+    private String profileImageUrl;
 
 
     public static Tweet fromJSON(JSONObject jsonObject){
@@ -121,15 +115,24 @@ public class Tweet extends Model implements Parcelable{
             tweet.body=jsonObject.getString("text");
             tweet.uid=jsonObject.getLong("id");
             tweet.createdAt=jsonObject.getString("created_at");
-            tweet.user=User.fromJson(jsonObject.getJSONObject("user"));
-            //tweet.save();
+
+            JSONObject userJson = jsonObject.getJSONObject("user");
+
+            tweet.userName = userJson.getString("name");
+            tweet.screenName = userJson.getString("screen_name");
+            tweet.userId = userJson.getLong("id");
+            tweet.profileImageUrl=userJson.getString("profile_image_url");
+            tweet.save();
             return tweet;
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
         return tweet;
     }
+
+
 
     public static ArrayList<Tweet> constructArrayFromJsonTweets(JSONArray jsonArray){
 
@@ -159,7 +162,11 @@ public class Tweet extends Model implements Parcelable{
         dest.writeString(body);
         dest.writeLong(uid);
         dest.writeString(createdAt);
-        dest.writeParcelable(user, flags);
+        dest.writeString(userName);
+        dest.writeString(screenName);
+        dest.writeLong(userId);
+        dest.writeString(profileImageUrl);
+
     }
 
     public static final Parcelable.Creator<Tweet> CREATOR
@@ -180,7 +187,11 @@ public class Tweet extends Model implements Parcelable{
         body=in.readString();
         uid=in.readLong();
         createdAt=in.readString();
-        user=(User) in.readParcelable(User.class.getClassLoader());
+        userName=in.readString();
+        screenName=in.readString();
+        userId=in.readLong();
+        profileImageUrl=in.readString();
+
     }
 
 
@@ -234,40 +245,23 @@ public class Tweet extends Model implements Parcelable{
         super();
     }
 
-    public static Cursor fetchResultCursor() {
-        String tableName = Cache.getTableInfo(Tweet.class).getTableName();
-        System.out.println("i am here");
-        // Query all items without any conditions
-        String resultRecords = new Select(tableName + ".*, " + tableName + ".Id as _id").
-                from(Tweet.class).toSql();
-        // Execute query on the underlying ActiveAndroid SQLite database
-        Cursor resultCursor = Cache.openDatabase().rawQuery(resultRecords, null);
-        System.out.println("!!!!"+resultCursor.toString());
-        return resultCursor;
+    public static Tweet tweetsById(long id) {
+        return new Select().from(Tweet.class).where("uid = ?", id).executeSingle();
     }
 
-    public static Cursor fetchUser(String createTime) {
-        String tableName = Cache.getTableInfo(Tweet.class).getTableName();
-        // Query all items without any conditions
-        /*String resultRecords = new Select("User").
-                from(Tweet.class).where("createTime = ?",createTime).toSql();
-        // Execute query on the underlying ActiveAndroid SQLite database
-        Cursor resultCursor = Cache.openDatabase().rawQuery(resultRecords, null);*/
+    public static List<Tweet> recentTweets() {
+        return new Select().from(Tweet.class).orderBy("uid DESC").limit("300").execute();
+    }
 
 
-        List<User> users = SQLiteUtils.rawQuery(Tweet.class, "SELECT User from Tweet", null);
+    public static ArrayList<Tweet> getTweetArrayList(List<Tweet> tweets) {
 
-        /*List<TodoItem> importantItems =
-  SQLiteUtils.rawQuery(TodoItem.class,
-     "SELECT * from todo_items where priority = ?",
-     new String[] { "high" });
-        * */
+        ArrayList<Tweet> tweetArrayList = new ArrayList<>();
 
+        for (int i=0;i<tweets.size();i++){
+            tweetArrayList.add(tweets.get(i));
+        }
 
-                 //int count =resultCursor.getCount();
-        //System.out.println(count+"");
-        //return resultCursor;
-
-        return null;
+        return tweetArrayList;
     }
 }

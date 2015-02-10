@@ -45,15 +45,15 @@ public class TweetsTimeLineAdapter extends ArrayAdapter<Tweet> {
 
        // String temp = tweet.getRelativeTimeAgo(tweet.getCreatedAt());
 
-        tvScreenName.setText(" @"+tweet.getUser().getScreenName());
-        tvUserName.setText(tweet.getUser().getName()+"");
+        tvScreenName.setText(" @"+tweet.getScreenName());
+        tvUserName.setText(tweet.getUserName());
         tvTweetBody.setText(tweet.getBody());
         tvRelTime.setText(Tweet.getShowTime(tweet.getCreatedAt()));
         ivProfilePic.setImageResource(0);
 
         //String profileUrl =tweet.getUser().getProfileImageUrl();
         //String biggerProfileUrl= profileUrl.replace("normal","bigger");
-        Picasso.with(getContext()).load(tweet.getUser().getProfileImageUrl()).into(ivProfilePic);
+        Picasso.with(getContext()).load(tweet.getProfileImageUrl()).into(ivProfilePic);
 
         return convertView;
     }
