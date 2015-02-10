@@ -10,6 +10,7 @@ I have implemented the following functionalities :
 5. Infinite Scroll.
 6. Swipe Refresh.
 7. User can see counter of the number of characters left.
+8. Persistence added using active android. 
 
 ![Alt text](https://github.com/someshjainiitkgp/SimpleTwitter/blob/master/twitterVideo.gif "Twitter Stream")
 
