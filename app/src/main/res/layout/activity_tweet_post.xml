@@ -9,19 +9,20 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:id="@+id/RLTweetButtons">
+        android:id="@+id/RLTweetButtons"
+        android:background="#21D3FF">
 
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cancel"
+            android:text="Home"
             android:id="@+id/btnCancelPost"
-            android:layout_alignParentLeft="true"
+            android:background="@android:color/transparent"
             android:onClick="onCancel"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentTop="true" />
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/imageView"
+            android:layout_toEndOf="@+id/imageView" />
 
         <Button
             android:layout_width="wrap_content"
@@ -29,6 +30,7 @@
             android:text="Tweet"
             android:id="@+id/btnTweet"
             android:onClick="onTweet"
+            android:background="@android:color/transparent"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
@@ -45,6 +47,16 @@
             android:layout_toLeftOf="@+id/btnTweet"
             android:layout_toStartOf="@+id/btnTweet"
             android:layout_alignParentBottom="true" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+
+            android:background="@drawable/icon_twitter"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -59,6 +71,7 @@
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:id="@+id/ivMyImage"
+            android:background="@drawable/border"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
@@ -72,9 +85,9 @@
             android:paddingLeft="20sp"
             android:id="@+id/tvMyUserName"
             android:gravity="center"
-            android:layout_alignParentTop="true"
             android:layout_toRightOf="@+id/ivMyImage"
-            android:layout_alignParentBottom="true" />
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentTop="true" />
 
 
     </RelativeLayout>

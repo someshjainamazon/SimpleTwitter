@@ -1,6 +1,7 @@
 package com.codepath.apps.mysimpletweets;
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -44,6 +45,18 @@ public class TweetPostActivity extends ActionBarActivity {
 
 
 
+
+        final ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
+        /*actionBar.setDisplayShowHomeEnabled(false);
+        actionBar.setDisplayShowTitleEnabled(false);
+        actionBar.setDisplayShowCustomEnabled(true);
+        actionBar.setCustomView(R.layout.custom_action_bar_post);
+        actionBar.setBackgroundDrawable(new ColorDrawable(0xFF21D3FF));*/
+
+
+
+
         myHandle = getIntent().getParcelableExtra("personalDetails");
         ivMyProfile=(ImageView)findViewById(R.id.ivMyImage);
         tvScreenName=(TextView)findViewById(R.id.tvMyUserName);
@@ -52,6 +65,9 @@ public class TweetPostActivity extends ActionBarActivity {
 
         tvScreenName.setText(myHandle.getScreenName());
         Picasso.with(TweetPostActivity.this).load(myHandle.getProfileImageUrl()).into(ivMyProfile);
+
+
+
 
 
         etTweetPost.addTextChangedListener(new TextWatcher() {
@@ -73,15 +89,6 @@ public class TweetPostActivity extends ActionBarActivity {
 
 
 
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_tweet_post, menu);
-
-
-        return true;
     }
 
     @Override

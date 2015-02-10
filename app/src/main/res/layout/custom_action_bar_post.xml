@@ -6,37 +6,41 @@
     <ImageView
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:id="@+id/ivIcon"
+        android:id="@+id/ivIcon_Post"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
 
         android:background="@drawable/icon_twitter"/>
 
-    <TextView
+    <Button
+        style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="HOME"
-        android:textColor="#000"
-        android:textStyle="bold"
-        android:id="@+id/tvHomeTitle"
+        android:id="@+id/btnPost"
+        android:background="@android:color/transparent"
         android:gravity="center"
-        android:paddingLeft="10sp"
-        android:layout_alignBottom="@+id/ivIcon"
-        android:layout_toRightOf="@+id/ivIcon"
-        android:layout_alignParentTop="true" />
+        android:paddingRight="10sp"
+        android:textStyle="bold"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignBottom="@+id/tvHomeTitle"
+        android:text="TWEET" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/feather_icon"
-        android:id="@+id/btnCompose"
-        android:paddingRight="50sp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignBottom="@+id/tvHomeTitle" />
+        android:text="Home"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:background="@android:color/transparent"
+        android:id="@+id/btnCancelPost"
+        android:layout_toRightOf="@+id/ivIcon_Post"
+        android:layout_toEndOf="@+id/ivIcon_Post"
+        android:layout_alignBottom="@+id/btnPost"
+        android:layout_alignParentTop="true" />
 
 
     <!--
