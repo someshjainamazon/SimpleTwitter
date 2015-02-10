@@ -32,7 +32,7 @@ public class TweetCursorAdapter extends CursorAdapter {
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
 
-        TextView tvScreenName = (TextView) view.findViewById(R.id.tvMyUserNameHome);
+        /*TextView tvScreenName = (TextView) view.findViewById(R.id.tvMyUserNameHome);
         TextView tvTweetBody = (TextView) view.findViewById(R.id.tvTweetBody);
         TextView tvRelTime = (TextView) view.findViewById(R.id.tvRelTime);
 
@@ -56,6 +56,6 @@ public class TweetCursorAdapter extends CursorAdapter {
         //ivProfilePic.setImageResource(0);
 
         //Picasso.with(TimelineActivity.this).load(tweet.getUser().getProfileImageUrl()).into(ivProfilePic);
-
+        */
     }
 }

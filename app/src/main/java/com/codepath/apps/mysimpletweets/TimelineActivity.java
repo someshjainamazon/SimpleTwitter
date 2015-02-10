@@ -30,6 +30,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class TimelineActivity extends ActionBarActivity {
 
@@ -159,12 +160,21 @@ public class TimelineActivity extends ActionBarActivity {
                 }
 
                 @Override
-                public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                    Log.d("DEBUG", responseString);
+                public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                    List<Tweet> tweets = Tweet.recentTweets();
+
+                    tweetList=Tweet.getTweetArrayList(tweets);
+                    timelineAdapter.addAll(tweetList);
+                    max_id = tweetList.get(tweetList.size() - 1).getUid();
+                    swipeContainer.setRefreshing(false);
+
 
                 }
             }, max_id, false);
 
+        }else {
+            List<Tweet> tweets = Tweet.recentTweets();
+            System.out.println("hello");
         }
     }
 
@@ -186,12 +196,19 @@ public class TimelineActivity extends ActionBarActivity {
                 }
 
                 @Override
-                public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                    Log.d("DEBUG", responseString);
+                public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                    List<Tweet> tweets = Tweet.recentTweets();
+
+                    tweetList=Tweet.getTweetArrayList(tweets);
+                    timelineAdapter.addAll(tweetList);
+                    max_id = tweetList.get(tweetList.size() - 1).getUid();
+                    swipeContainer.setRefreshing(false);
+
 
                 }
             });
         }
+
     }
 
 

@@ -67,25 +67,27 @@ public class User extends Model implements Parcelable {
         this.name = name;
     }
 
+    @Column(name = "profileUrl")
     private String profileImageUrl;
 
 
     public static User fromJson(JSONObject jsonObject){
         User user = new User();
+        User existingUser=null;
         try {
             user.name = jsonObject.getString("name");
             user.screenName = jsonObject.getString("screen_name");
             user.uid = jsonObject.getLong("id");
             user.profileImageUrl=jsonObject.getString("profile_image_url");
-            /*existingUser =new Select().from(User.class).where("screename = ?", user.screenName).executeSingle();
+            existingUser =new Select().from(User.class).where("screename = ?", user.screenName).executeSingle();
             if(existingUser==null){
                 user.save();
                 existingUser= new Select().from(User.class).where("screename = ?", user.screenName).executeSingle();
-            }*/
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return user;
+        return existingUser;
 
     }
 
