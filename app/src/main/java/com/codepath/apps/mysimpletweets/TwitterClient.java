@@ -8,6 +8,7 @@ import android.content.Context;
 
 import com.codepath.oauth.OAuthBaseClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 /*
@@ -60,13 +61,63 @@ public class TwitterClient extends OAuthBaseClient {
     }
 
 
+    public void getUserTimeLine(AsyncHttpResponseHandler responseHandler, String screenName){
+        String apiUrl = getApiUrl("statuses/user_timeline.json");
+        RequestParams requestParams = new RequestParams();
+        requestParams.put("count", 25);
+        requestParams.put("screen_name", screenName);
+
+        getClient().get(apiUrl, requestParams, responseHandler);
+
+    }
+
+
+    public void getUserInfo(AsyncHttpResponseHandler responseHandler){
+        String apiUrl = getApiUrl("account/verify_credentials.json");
+
+        getClient().get(apiUrl, null, responseHandler);
+
+    }
+
+
+    public void getMentionTimeLine(AsyncHttpResponseHandler responseHandler) {
+
+        String apiUrl = getApiUrl("statuses/mentions_timeline.json");
+        RequestParams requestParams = new RequestParams();
+        requestParams.put("count", 25);
+        requestParams.put("since_id", 1);
+
+
+        getClient().get(apiUrl, requestParams, responseHandler);
+    }
+
+    public void getMentionTimeLineInfinite(AsyncHttpResponseHandler responseHandler, long max_id, boolean isFirst) {
+
+        String apiUrl = getApiUrl("statuses/mentions_timeline.json");
+        RequestParams requestParams = new RequestParams();
+        requestParams.put("count", 25);
+        requestParams.put("since_id", 1);
+        if(!isFirst) requestParams.put("max_id", max_id);
+        getClient().get(apiUrl, requestParams, responseHandler);
+    }
+
+
+
     public void getMyProfile(AsyncHttpResponseHandler responseHandler){
         String apiUrl = getApiUrl("users/show.json");
         RequestParams requestParams = new RequestParams();
         requestParams.put("screen_name", "someshjain1");
         getClient().get(apiUrl, requestParams, responseHandler);
 
+    }
 
+
+
+    public void getUserProfile(AsyncHttpResponseHandler responseHandler, String screenName){
+        String apiUrl = getApiUrl("users/show.json");
+        RequestParams requestParams = new RequestParams();
+        requestParams.put("screen_name", screenName);
+        getClient().get(apiUrl, requestParams, responseHandler);
 
     }
 
@@ -80,6 +131,8 @@ public class TwitterClient extends OAuthBaseClient {
 
 
     }
+
+
 
 
 

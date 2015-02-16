@@ -6,6 +6,10 @@ import android.database.Cursor;
 import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -15,11 +19,16 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewParent;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.astuetz.PagerSlidingTabStrip;
 import com.codepath.apps.mysimpletweets.adapters.TweetCursorAdapter;
 import com.codepath.apps.mysimpletweets.adapters.TweetsTimeLineAdapter;
+import com.codepath.apps.mysimpletweets.fragments.HomeTimelineFragment;
+import com.codepath.apps.mysimpletweets.fragments.TweetsListFragment;
+import com.codepath.apps.mysimpletweets.fragments.UserMentionFragment;
 import com.codepath.apps.mysimpletweets.listeners.EndlessScrollListener;
 import com.codepath.apps.mysimpletweets.models.Tweet;
 import com.codepath.apps.mysimpletweets.models.User;
@@ -34,27 +43,17 @@ import java.util.List;
 
 public class TimelineActivity extends ActionBarActivity {
 
-
-    private TwitterClient twitterClient;
-    private TweetsTimeLineAdapter timelineAdapter;
-    private ArrayList<Tweet> tweetList;
-    private ListView lvTweets;
-    private long max_id;
     private User myHandle;
-    public static final int  REQUEST_RESULT=50;
-    private SwipeRefreshLayout swipeContainer;
+    public static final int  REQUEST_RESULT_POST=50;
+    public static final int  REQUEST_RESULT_PROFILE=100;
+
+
     private TweetCursorAdapter tweetCursorAdapter;
     Cursor tweetCursor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline);
-
-        /*ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayShowTitleEnabled(true);
-        actionBar.setTitle("@someshjain1");*/
-
-
 
         final ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowHomeEnabled(false);
@@ -64,39 +63,41 @@ public class TimelineActivity extends ActionBarActivity {
         actionBar.setBackgroundDrawable(new ColorDrawable(0xFF21D3FF));
 
 
+        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+        viewPager.setAdapter(new TweetsPageAdapter(getSupportFragmentManager()));
 
-
-        twitterClient = TwitterApp.getRestClient(); // singleton client
-        lvTweets = (ListView) findViewById(R.id.lvTweets);
-
-        tweetList = new ArrayList<Tweet>();
-        timelineAdapter = new TweetsTimeLineAdapter(this, tweetList);
-        lvTweets.setAdapter(timelineAdapter);
-
+        PagerSlidingTabStrip tabStrip = (PagerSlidingTabStrip) findViewById(R.id.tabs);
+        tabStrip.setViewPager(viewPager);
 
         final Button btnPost = (Button) findViewById(R.id.btnCompose);
         btnPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(TimelineActivity.this, TweetPostActivity.class);
-                i.putExtra("personalDetails", myHandle);
-                startActivityForResult(i, REQUEST_RESULT);
+                //i.putExtra("personalDetails", myHandle);
+                //startActivityForResult(i, REQUEST_RESULT_POST);
+                startActivity(i);
+
+            }
+        });
+
+
+        final Button btnProfile = (Button) findViewById(R.id.btnProfile);
+        btnProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(TimelineActivity.this, ProfileActivity.class);
+                startActivity(i);
 
             }
         });
 
 
 
+        //getPersonalDetails();
+        //populateTimeline();
 
-        /*tweetCursor= Tweet.fetchResultCursor();
-        tweetCursorAdapter = new TweetCursorAdapter(this, tweetCursor);
-        lvTweets.setAdapter(tweetCursorAdapter);*/
-
-
-        getPersonalDetails();
-        populateTimeline();
-
-        lvTweets.setOnScrollListener(new EndlessScrollListener() {
+        /*lvTweets.setOnScrollListener(new EndlessScrollListener() {
             @Override
             public void onLoadMore(int page, int totalItemsCount) {
                 loadMoreData();
@@ -116,10 +117,11 @@ public class TimelineActivity extends ActionBarActivity {
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
-
+        */
 
     }
 
+    /*
     private void getPersonalDetails() {
         if(isInternetAvailable()) {
             twitterClient.getMyProfile(new JsonHttpResponseHandler() {
@@ -141,75 +143,9 @@ public class TimelineActivity extends ActionBarActivity {
             });
         }
 
-    }
+    }*/
 
-    private void loadMoreData() {
-
-        if(isInternetAvailable()) {
-            twitterClient.getHomeTimeLineInfinite(new JsonHttpResponseHandler() {
-
-                @Override
-                public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-
-                    timelineAdapter.addAll(Tweet.constructArrayFromJsonTweets(response));
-                    //tweetList = Tweet.constructArrayFromJsonTweets(response);
-                    max_id = tweetList.get(tweetList.size() - 1).getUid();
-                    //tweetCursorAdapter.notifyDataSetChanged();
-                    swipeContainer.setRefreshing(false);
-
-                }
-
-                @Override
-                public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                    List<Tweet> tweets = Tweet.recentTweets();
-
-                    tweetList=Tweet.getTweetArrayList(tweets);
-                    timelineAdapter.addAll(tweetList);
-                    max_id = tweetList.get(tweetList.size() - 1).getUid();
-                    swipeContainer.setRefreshing(false);
-
-
-                }
-            }, max_id, false);
-
-        }else {
-            List<Tweet> tweets = Tweet.recentTweets();
-            System.out.println("hello");
-        }
-    }
-
-    // send api request to get timeline json and then fill list view by creating tweet objects
-    private void populateTimeline() {
-        if(isInternetAvailable()) {
-            twitterClient.getHomeTimeLine(new JsonHttpResponseHandler() {
-
-                @Override
-                public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-
-                    timelineAdapter.addAll(Tweet.constructArrayFromJsonTweets(response));
-                    //tweetList =Tweet.constructArrayFromJsonTweets(response);
-                    //System.out.println("hello");
-                    //tweetCursorAdapter.notifyDataSetChanged();
-                    max_id = tweetList.get(tweetList.size() - 1).getUid();
-                    swipeContainer.setRefreshing(false);
-
-                }
-
-                @Override
-                public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                    List<Tweet> tweets = Tweet.recentTweets();
-
-                    tweetList=Tweet.getTweetArrayList(tweets);
-                    timelineAdapter.addAll(tweetList);
-                    max_id = tweetList.get(tweetList.size() - 1).getUid();
-                    swipeContainer.setRefreshing(false);
-
-
-                }
-            });
-        }
-
-    }
+       // send api request to get timeline json and then fill list view by creating tweet objects
 
 
     /*@Override
@@ -253,6 +189,7 @@ public class TimelineActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /*
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
@@ -264,7 +201,8 @@ public class TimelineActivity extends ActionBarActivity {
 
             }
         }
-    }
+    }*/
+
 
     private boolean isInternetAvailable() {
 
@@ -273,5 +211,32 @@ public class TimelineActivity extends ActionBarActivity {
         return networkInfo!=null && networkInfo.isConnectedOrConnecting();
     }
 
+    public class TweetsPageAdapter extends FragmentPagerAdapter {
+
+        private String tabTitles[] = {"Home", "Mentions"};
+
+        public TweetsPageAdapter(FragmentManager fm){
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+
+            if(position==0) return new HomeTimelineFragment();
+            else if (position==1) return new UserMentionFragment();
+            else return null;
+
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return tabTitles[position];
+        }
+
+        @Override
+        public int getCount() {
+            return tabTitles.length;
+        }
+    }
 
 }

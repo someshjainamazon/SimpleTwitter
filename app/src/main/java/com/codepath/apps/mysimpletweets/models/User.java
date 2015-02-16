@@ -30,6 +30,41 @@ public class User extends Model implements Parcelable {
     @Column(name = "screename")
     private String screenName;
 
+    @Column(name = "tagline")
+    private String tagLine;
+
+    @Column(name = "follower")
+    private int followerCount;
+
+    public String getTagLine() {
+        return tagLine;
+    }
+
+    public void setTagLine(String tagLine) {
+        this.tagLine = tagLine;
+    }
+
+    public int getFollowerCount() {
+        return followerCount;
+    }
+
+    public void setFollowerCount(int followerCount) {
+        this.followerCount = followerCount;
+    }
+
+    public int getFollowingCount() {
+        return followingCount;
+    }
+
+    public void setFollowingCount(int followingCount) {
+        this.followingCount = followingCount;
+    }
+
+    @Column(name = "following")
+    private int followingCount;
+
+
+
     // This is the unique id given by the server
     //@Column(name = "remote_id", unique = true)
     //public long remoteId;
@@ -79,15 +114,20 @@ public class User extends Model implements Parcelable {
             user.screenName = jsonObject.getString("screen_name");
             user.uid = jsonObject.getLong("id");
             user.profileImageUrl=jsonObject.getString("profile_image_url");
-            existingUser =new Select().from(User.class).where("screename = ?", user.screenName).executeSingle();
+            user.tagLine=jsonObject.getString("description");
+            user.followerCount=jsonObject.getInt("followers_count");
+            user.followingCount=jsonObject.getInt("friends_count");
+
+
+            /*existingUser =new Select().from(User.class).where("screename = ?", user.screenName).executeSingle();
             if(existingUser==null){
                 user.save();
                 existingUser= new Select().from(User.class).where("screename = ?", user.screenName).executeSingle();
-            }
+            }*/
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return existingUser;
+        return user;
 
     }
 
@@ -103,6 +143,11 @@ public class User extends Model implements Parcelable {
         dest.writeLong(uid);
         dest.writeString(screenName);
         dest.writeString(profileImageUrl);
+        dest.writeString(tagLine);
+        dest.writeInt(followerCount);
+        dest.writeInt(followingCount);
+
+
     }
 
     public static final Parcelable.Creator<User> CREATOR
@@ -124,6 +169,9 @@ public class User extends Model implements Parcelable {
         uid=in.readLong();
         screenName=in.readString();
         profileImageUrl=in.readString();
+        tagLine=in.readString();
+        followerCount=in.readInt();
+        followingCount=in.readInt();
     }
 
     public User() {
