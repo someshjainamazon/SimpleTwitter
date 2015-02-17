@@ -9,42 +9,23 @@ import android.net.NetworkInfo;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.KeyEvent;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewParent;
-import android.view.Window;
 import android.widget.Button;
-import android.widget.ListView;
+import android.widget.Toast;
 
 import com.astuetz.PagerSlidingTabStrip;
 import com.codepath.apps.mysimpletweets.adapters.TweetCursorAdapter;
-import com.codepath.apps.mysimpletweets.adapters.TweetsTimeLineAdapter;
 import com.codepath.apps.mysimpletweets.fragments.HomeTimelineFragment;
-import com.codepath.apps.mysimpletweets.fragments.TweetsListFragment;
 import com.codepath.apps.mysimpletweets.fragments.UserMentionFragment;
-import com.codepath.apps.mysimpletweets.fragments.UserTimeLineFragment;
-import com.codepath.apps.mysimpletweets.listeners.EndlessScrollListener;
 import com.codepath.apps.mysimpletweets.models.Tweet;
 import com.codepath.apps.mysimpletweets.models.User;
-import com.loopj.android.http.JsonHttpResponseHandler;
 
-import org.apache.http.Header;
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.List;
-
-public class TimelineActivity extends ActionBarActivity {
+public class TimelineActivity extends ActionBarActivity implements RetweetDialog.RetweetListener{
 
     private User myHandle;
     public static final int  REQUEST_RESULT_POST=50;
@@ -66,8 +47,6 @@ public class TimelineActivity extends ActionBarActivity {
         actionBar.setDisplayShowCustomEnabled(true);
         actionBar.setCustomView(R.layout.custom_action_bar);
         actionBar.setBackgroundDrawable(new ColorDrawable(0xFF21D3FF));
-
-
 
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
@@ -101,6 +80,20 @@ public class TimelineActivity extends ActionBarActivity {
             }
         });
 
+
+        /*Button btnRetweet = (Button)findViewById(R.id.btnRetweet);
+
+        btnRetweet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                retweetDialog();
+            }
+        });*/
+
+
+
+
+
     }
 
     @Override
@@ -131,12 +124,28 @@ public class TimelineActivity extends ActionBarActivity {
 
 
 
+    private void retweetDialog() {
+
+        FragmentManager fm = getSupportFragmentManager();
+        RetweetDialog retweetDialog = RetweetDialog.newInstance();
+        retweetDialog.show(fm, "fragment_retweet");
+    }
+
 
     private boolean isInternetAvailable() {
 
         ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
         return networkInfo!=null && networkInfo.isConnectedOrConnecting();
+    }
+
+    @Override
+    public void onFinishRetweetDialog(Boolean returnBool) {
+
+        if(returnBool==true){
+            Toast.makeText(this, "retweet happened", Toast.LENGTH_LONG).show();
+        }
+
     }
 
     public class TweetsPageAdapter extends FragmentPagerAdapter {

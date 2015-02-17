@@ -2,6 +2,7 @@ package com.codepath.apps.mysimpletweets.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,7 +64,6 @@ public class TweetsTimeLineAdapter extends ArrayAdapter<Tweet> {
 
 
         Button btnLike = (Button) convertView.findViewById(R.id.btnLike);
-        Button btnRetweet = (Button) convertView.findViewById(R.id.btnRetweet);
 
         btnLike.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,6 +78,7 @@ public class TweetsTimeLineAdapter extends ArrayAdapter<Tweet> {
 
             }
         });
+
 
         // String temp = tweet.getRelativeTimeAgo(tweet.getCreatedAt());
 
@@ -102,4 +103,6 @@ public class TweetsTimeLineAdapter extends ArrayAdapter<Tweet> {
 
         return convertView;
     }
+
+
 }
