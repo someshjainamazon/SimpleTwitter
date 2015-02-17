@@ -108,6 +108,29 @@ public class Tweet extends Model implements Parcelable{
     @Column(name = "profileUrl")
     private String profileImageUrl;
 
+    @Column(name = "favCount")
+    private int favCount;
+
+    public int getRetweetCount() {
+        return retweetCount;
+    }
+
+    public void setRetweetCount(int retweetCount) {
+        this.retweetCount = retweetCount;
+    }
+
+    public int getFavCount() {
+        return favCount;
+    }
+
+    public void setFavCount(int favCount) {
+        this.favCount = favCount;
+    }
+
+    @Column(name = "retweetCount")
+    private int retweetCount;
+
+
 
     public static Tweet fromJSON(JSONObject jsonObject){
         Tweet tweet = new Tweet();
@@ -115,6 +138,8 @@ public class Tweet extends Model implements Parcelable{
             tweet.body=jsonObject.getString("text");
             tweet.uid=jsonObject.getLong("id");
             tweet.createdAt=jsonObject.getString("created_at");
+            tweet.retweetCount=jsonObject.getInt("retweet_count");
+            tweet.favCount=0;
 
             JSONObject userJson = jsonObject.getJSONObject("user");
 
@@ -126,6 +151,7 @@ public class Tweet extends Model implements Parcelable{
             return tweet;
 
         } catch (JSONException e) {
+            System.out.printf(e.toString());
             e.printStackTrace();
         }
 
@@ -166,6 +192,8 @@ public class Tweet extends Model implements Parcelable{
         dest.writeString(screenName);
         dest.writeLong(userId);
         dest.writeString(profileImageUrl);
+        dest.writeInt(favCount);
+        dest.writeInt(retweetCount);
 
     }
 
@@ -191,6 +219,8 @@ public class Tweet extends Model implements Parcelable{
         screenName=in.readString();
         userId=in.readLong();
         profileImageUrl=in.readString();
+        favCount=in.readInt();
+        retweetCount=in.readInt();
 
     }
 

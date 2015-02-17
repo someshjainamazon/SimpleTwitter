@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -57,13 +58,43 @@ public class TweetsTimeLineAdapter extends ArrayAdapter<Tweet> {
             }
         });
 
+        final TextView tvLikeCount = (TextView) convertView.findViewById(R.id.tvLikeCount);
+        TextView tvRetweetCount = (TextView) convertView.findViewById(R.id.tvRetweetCount);
+
+
+        Button btnLike = (Button) convertView.findViewById(R.id.btnLike);
+        Button btnRetweet = (Button) convertView.findViewById(R.id.btnRetweet);
+
+        btnLike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(tvLikeCount.getText()==""){
+                    tvLikeCount.setText("1");
+                } else {
+
+                    int numLikes = Integer.parseInt(tvLikeCount.getText()+"");
+                    tvLikeCount.setText((numLikes+1)+"");
+                }
+
+            }
+        });
+
         // String temp = tweet.getRelativeTimeAgo(tweet.getCreatedAt());
 
         tvScreenName.setText(" @"+tweet.getScreenName());
         tvUserName.setText(tweet.getUserName());
         tvTweetBody.setText(tweet.getBody());
         tvRelTime.setText(Tweet.getShowTime(tweet.getCreatedAt()));
+
+        if(tweet.getFavCount()==0) tvLikeCount.setText("");
+        else tvLikeCount.setText(tweet.getFavCount()+"");
+
+        if(tweet.getRetweetCount()==0) tvRetweetCount.setText("");
+        else tvRetweetCount.setText(tweet.getRetweetCount()+"");
+
         ivProfilePic.setImageResource(0);
+
+
 
         //String profileUrl =tweet.getUser().getProfileImageUrl();
         //String biggerProfileUrl= profileUrl.replace("normal","bigger");

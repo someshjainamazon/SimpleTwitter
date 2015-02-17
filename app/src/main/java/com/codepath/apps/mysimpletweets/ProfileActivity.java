@@ -25,7 +25,7 @@ public class ProfileActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
+        setContentView(R.layout.activity_profile_copy);
         String screenName = getIntent().getStringExtra("screen_name");
         client = TwitterApp.getRestClient();
 
@@ -36,7 +36,8 @@ public class ProfileActivity extends ActionBarActivity {
                 public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                     user = User.fromJson(response);
                     getSupportActionBar().setTitle("@"+user.getScreenName());
-                    populateProfile(user);
+                    //populateProfile(user);
+                    populateProfileCopy(user);
                 }
             });
 
@@ -48,7 +49,8 @@ public class ProfileActivity extends ActionBarActivity {
                 public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                     user = User.fromJson(response);
                     getSupportActionBar().setTitle("@"+user.getScreenName());
-                    populateProfile(user);
+                    //populateProfile(user);
+                    populateProfileCopy(user);
                 }
             }, screenName);
 
@@ -59,7 +61,8 @@ public class ProfileActivity extends ActionBarActivity {
         if(savedInstanceState==null){
             UserTimeLineFragment userTimeLineFragment = UserTimeLineFragment.newInstance(screenName);
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.flContainer, userTimeLineFragment);
+            //ft.replace(R.id.flContainer, userTimeLineFragment);
+            ft.replace(R.id.flContainerCopy, userTimeLineFragment);
             ft.commit();
         }
 
@@ -81,6 +84,29 @@ public class ProfileActivity extends ActionBarActivity {
         tvFollowing.setText(user.getFollowingCount()+" Following");
 
         Picasso.with(this).load(user.getProfileImageUrl()).into(ivProfile);
+
+    }
+
+    private void populateProfileCopy(User user) {
+
+        TextView tvName = (TextView) findViewById(R.id.tvUserNameProfileCopy);
+        TextView tvTagLine = (TextView) findViewById(R.id.tvTagLineProfileCopy);
+        TextView tvFollower = (TextView) findViewById(R.id.tvNumFollowersProfileCopy);
+        TextView tvFollowing = (TextView) findViewById(R.id.tvNumFollowingProfileCopy);
+        ImageView ivProfile = (ImageView) findViewById(R.id.ivFrontImageProfile);
+        TextView tvNumTweets = (TextView) findViewById(R.id.tvNumTweetsProfileCopy);
+        ImageView ivProfileBackGround = (ImageView) findViewById(R.id.ivBackImage_Profile);
+
+
+        tvName.setText(user.getName());
+        tvTagLine.setText(user.getTagLine());
+        tvFollower.setText(user.getFollowerCount()+" ");
+        tvFollowing.setText(user.getFollowingCount()+" ");
+        tvNumTweets.setText(user.getTweetCount()+" ");
+
+        Picasso.with(this).load(user.getProfileImageUrl()).into(ivProfile);
+        Picasso.with(this).load(user.getProfileBackGroundImageUrl()).into(ivProfileBackGround);
+
 
     }
 

@@ -1,0 +1,194 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.codepath.apps.mysimpletweets.ProfileActivity">
+
+
+    <!--<FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rlUserHeader"
+        android:layout_alignLeft="@+id/rlUserHeader"
+        android:layout_alignStart="@+id/rlUserHeader">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="10 Followers"
+            android:id="@+id/tvFollowerCount"
+            android:layout_gravity="left|top" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="10 Following"
+            android:id="@+id/tvFollowingCount"
+            android:layout_gravity="center_horizontal|top" />
+    </FrameLayout>-->
+
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:id="@+id/rlUserHeaderCopy"
+        android:layout_alignParentStart="true">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            android:id="@+id/ivBackImage_Profile"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:background="@drawable/border"
+
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/ivFrontImageProfile"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="User Name"
+            android:id="@+id/tvUserNameProfileCopy"
+            android:layout_below="@+id/ivFrontImageProfile"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Screen Name"
+            android:id="@+id/tvTagLineProfileCopy"
+            android:gravity="center"
+            android:layout_below="@+id/tvUserNameProfileCopy"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+
+    </RelativeLayout>
+
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="30dp"
+        android:layout_below="@+id/rlUserHeaderCopy"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/llUserFollowDetailCopy">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="NumTweets"
+            android:paddingRight="30sp"
+            android:paddingLeft="20sp"
+            android:id="@+id/tvNumTweetsProfileCopy" />
+
+        <!--<ImageView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:src="@android:drawable/divider_horizontal_textfield"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingBottom="2dp"
+            android:paddingTop="2dp" />-->
+
+        <View
+            android:layout_width="3dp"
+            android:layout_height="wrap_content"
+            android:background="#21D3FF" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="NumFollowers"
+            android:paddingLeft="30sp"
+            android:paddingRight="30sp"
+            android:id="@+id/tvNumFollowersProfileCopy" />
+
+        <View
+            android:layout_width="3dp"
+            android:layout_height="wrap_content"
+            android:background="#21D3FF" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="NumFollowing"
+            android:paddingLeft="20sp"
+            android:paddingRight="30sp"
+            android:id="@+id/tvNumFollowingProfileCopy" />
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/llUserFollowDetailCopy"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/flContainerCopy">
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:background="#21D3FF" />
+
+
+        </FrameLayout>
+
+    <!--<LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_below="@+id/llUserFollowDetailCopy"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/llBelowLineVIew"
+        android:layout_alignBottom="@+id/llUserFollowDetailCopy">
+
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#21D3FF" />
+
+
+        </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/rlUserHeaderCopy"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/llUserFollowDetailCopy">
+
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:background="#21D3FF" />
+        </LinearLayout>-->
+
+
+</RelativeLayout>

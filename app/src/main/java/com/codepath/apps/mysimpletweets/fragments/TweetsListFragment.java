@@ -60,7 +60,6 @@ public class TweetsListFragment extends Fragment {
     }
 
     public void addAll(List<Tweet> tweets){
-        System.out.println("Current size of tweets is : ---- " + tweets);
         timelineAdapter.addAll(tweets);
     }
 
