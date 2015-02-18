@@ -100,9 +100,17 @@ public class ProfileActivity extends ActionBarActivity {
 
         tvName.setText(user.getName());
         tvTagLine.setText(user.getTagLine());
-        tvFollower.setText(user.getFollowerCount()+" ");
-        tvFollowing.setText(user.getFollowingCount()+" ");
-        tvNumTweets.setText(user.getTweetCount()+" ");
+
+        if(user.getFollowerCount()>=1000)tvFollower.setText((user.getFollowerCount()/1000)+"k Followers");
+        else tvFollower.setText(user.getFollowerCount()+" Followers");
+
+        if(user.getFollowingCount()>=1000)tvFollowing.setText((user.getFollowerCount()/1000)+"k Following");
+        else tvFollowing.setText(user.getFollowingCount()+" Following");
+
+        if(user.getTweetCount()>=1000)tvNumTweets.setText((user.getTweetCount()/1000)+"k Tweets");
+        else tvNumTweets.setText(user.getTweetCount()+" Tweets");
+
+
 
         Picasso.with(this).load(user.getProfileImageUrl()).into(ivProfile);
         Picasso.with(this).load(user.getProfileBackGroundImageUrl()).into(ivProfileBackGround);

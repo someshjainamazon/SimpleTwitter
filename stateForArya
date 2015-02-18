@@ -1,0 +1,323 @@
+yinst.timestamp: 1424215094
+yinst.command: /usr/local/bin/yinst save -file stateForArya
+yinst.hostname: cqg01.answers.bf1.yahoo.com
+yinst.user: somesh
+yinst.root: /home/y
+yinst.osrelease: rhel 6Server
+yinst.yinst_version: 7.184.6448
+yinst.package: answers_cq_impl-0.1.0.4(1417934305)|1418254440|meharo@generalnat.glb.corp.sg3.yahoo.com
+yinst.package: answers_cq_prod_keydb-1.1(1386155299)|1398718072|hizibiz@generalnat.glb.corp.sg3.yahoo.com
+yinst.package: answers_cqsystem-0.1.0.28(1422409632)|1422572863|meharo@98.136.200.225
+yinst.package: answers_recsys_api-0.1.0.43(1371375186)|1398332640|hizibiz@203.83.249.41
+yinst.package: ccmp_pool-1.0.4(1383347623)|1398332645|hizibiz@203.83.249.41
+yinst.package: ports/cronolog-1.6.2-6.2(1352445416)|1398332640|hizibiz@203.83.249.41
+yinst.package: daemontools_y-0.77.37(1360015473)|1399366699|hizibiz@203.83.249.41
+yinst.package: jports_commons_daemon__commons_daemon-1.0.1_1(1203309932)|1398332644|hizibiz@203.83.249.41
+yinst.package: ports/libyaml-0.1.4-2(1354014206)|1398332644|hizibiz@203.83.249.41
+yinst.package: local_perl_compat-3.0.0(1330030487)|1398332630|hizibiz@203.83.249.41
+yinst.package: mdbm-4.2.2.168(1376524962)|1398332640|hizibiz@203.83.249.41
+yinst.package: mdbm_ylock_plugin-4.2.2.168(1376524962)|1398332649|hizibiz@203.83.249.41
+yinst.package: patchtrain-0.1(1414002112)|1414105454|scanserf@localhost
+yinst.package: perl-5.14.2_05(1358458899)|1398332629|hizibiz@203.83.249.41
+yinst.package: ypan/perl-AnyEvent-6.14_03(1343778895)|1399366699|hizibiz@203.83.249.41
+yinst.package: ypan/perl-Data-Dump-1.22_147(1394636745)|1398332645|hizibiz@203.83.249.41
+yinst.package: ypan/perl-Digest-HMAC-1.03_78(1386861630)|1398332644|hizibiz@203.83.249.41
+yinst.package: ypan/perl-Digest-MD5-2.52_14(1366304905)|1398332644|hizibiz@203.83.249.41
+yinst.package: ypan/perl-Digest-SHA-5.84_73(1386861651)|1399366698|hizibiz@203.83.249.41
+yinst.package: ypan/perl-Encode-Locale-1.03_154(1394636850)|1398332630|hizibiz@203.83.249.41
+yinst.package: ypan/perl-File-Listing-6.04_06(1366915096)|1398332641|hizibiz@203.83.249.41
+yinst.package: ypan/perl-File-Path-2.0800_05(1335196695)|1399366698|hizibiz@203.83.249.41
+yinst.package: ypan/perl-HTML-Parser-3.71_01(1377120668)|1398332644|hizibiz@203.83.249.41
+yinst.package: ypan/perl-HTML-Tagset-3.20_10(1366913061)|1398332640|hizibiz@203.83.249.41
+yinst.package: ypan/perl-HTTP-Cookies-6.01_04(1366915289)|1398332649|hizibiz@203.83.249.41
+yinst.package: ypan/perl-HTTP-Daemon-6.01_04(1366915121)|1398332644|hizibiz@203.83.249.41
+yinst.package: ypan/perl-HTTP-Date-6.02_148(1394637363)|1398332649|hizibiz@203.83.249.41
+yinst.package: ypan/perl-HTTP-Message-6.06_151(1394637408)|1398332644|hizibiz@203.83.249.41
+yinst.package: ypan/perl-HTTP-Negotiate-6.01_07(1366915079)|1398332640|hizibiz@203.83.249.41
+yinst.package: ypan/perl-IO-HTML-1.00_148(1394637552)|1398332641|hizibiz@203.83.249.41
+yinst.package: ypan/perl-IO-Socket-SSL-1.967_149(1394637615)|1398332640|hizibiz@203.83.249.41
+yinst.package: ypan/perl-IO-Socket-Socks-0.62_04(1343692707)|1398332644|hizibiz@203.83.249.41
+yinst.package: ypan/perl-JSON-2.90_148(1394637649)|1399366698|hizibiz@203.83.249.41
+yinst.package: ypan/perl-JSON-XS-2.34_11(1395803632)|1399366698|hizibiz@203.83.249.41
+yinst.package: ypan/perl-LWP-MediaTypes-6.02_152(1394637741)|1398332640|hizibiz@203.83.249.41
+yinst.package: ypan/perl-LWP-Protocol-https-6.04_147(1394637767)|1398332631|hizibiz@203.83.249.41
+yinst.package: ypan/perl-LWP-Protocol-socks-1.6_03(1343692735)|1398332641|hizibiz@203.83.249.41
+yinst.package: ypan/perl-Log-Log4perl-1.42_08(1378508303)|1398332644|hizibiz@203.83.249.41
+yinst.package: ypan/perl-MIME-Base64-3.13_10(1366305138)|1398332645|hizibiz@203.83.249.41
+yinst.package: ypan/perl-Mozilla-CA-20130114_144(1394638067)|1398332640|hizibiz@203.83.249.41
+yinst.package: ypan/perl-NTLM-1.09_146(1394638185)|1398332640|hizibiz@203.83.249.41
+yinst.package: ypan/perl-Net-HTTP-6.06_149(1394638093)|1398332640|hizibiz@203.83.249.41
+yinst.package: ypan/perl-Net-SSLeay-1.58_147(1394638161)|1398332641|hizibiz@203.83.249.41
+yinst.package: ypan/perl-Object-Event-1.23_03(1344320859)|1399366698|hizibiz@203.83.249.41
+yinst.package: ypan/perl-Pod-Perldoc-3.17_09(1346984294)|1398332641|hizibiz@203.83.249.41
+yinst.package: ypan/perl-Sys-Hostname-FQDN-0.11_02(1366914057)|1398332631|hizibiz@203.83.249.41
+yinst.package: ypan/perl-TermReadKey-2.30_13(1366305324)|1399366698|hizibiz@203.83.249.41
+yinst.package: ypan/perl-URI-1.60_06(1366914832)|1398332631|hizibiz@203.83.249.41
+yinst.package: ypan/perl-Unix-Syslog-1.1_05(1366914629)|1398332637|hizibiz@203.83.249.41
+yinst.package: ypan/perl-WWW-Curl-4.15_11(1366914668)|1398332640|hizibiz@203.83.249.41
+yinst.package: ypan/perl-WWW-RobotRules-6.02_05(1366915313)|1398332631|hizibiz@203.83.249.41
+yinst.package: perl-XML-LibXML-2.0014_02(1366914817)|1398332644|hizibiz@203.83.249.41
+yinst.package: ypan/perl-XML-NamespaceSupport-1.11_76(1386865804)|1398332631|hizibiz@203.83.249.41
+yinst.package: ypan/perl-XML-Parser-2.41_07(1346989738)|1398332644|hizibiz@203.83.249.41
+yinst.package: ypan/perl-XML-SAX-0.99_03(1362002445)|1398332645|hizibiz@203.83.249.41
+yinst.package: ypan/perl-XML-SAX-Base-1.08_73(1386865854)|1398332640|hizibiz@203.83.249.41
+yinst.package: ypan/perl-YAML-0.80_05(1343779852)|1398332631|hizibiz@203.83.249.41
+yinst.package: ypan/perl-YAML-LibYAML-0.38_03(1343682088)|1399366698|hizibiz@203.83.249.41
+yinst.package: ypan/perl-common-sense-3.72_124(1397834043)|1399366698|hizibiz@203.83.249.41
+yinst.package: ypan/perl-libnet-1.25_01(1392390505)|1398332644|hizibiz@203.83.249.41
+yinst.package: ypan/perl-libwww-perl-6.05_01(1377121664)|1398332648|hizibiz@203.83.249.41
+yinst.package: perl_AnyEvent_Curl_Multi-1.0.1(1300913979)|1399366698|hizibiz@203.83.249.41
+yinst.package: perl_MDBM_File-4.2.2.168(1376524962)|1398332644|hizibiz@203.83.249.41
+yinst.package: perl_yax-3.1.5(1356558143)|1398332644|hizibiz@203.83.249.41
+yinst.package: perl_ynetdblib-1.13.16(1356560650)|1399366697|hizibiz@203.83.249.41
+yinst.package: perl_ysecure-2.4.5(1356558170)|1399366698|hizibiz@203.83.249.41
+yinst.package: perlbase-3.0.1_01(1330030486)|1398332645|hizibiz@203.83.249.41
+yinst.package: ports/protobuf-2.4.1-1_02(1351855505)|1398332649|hizibiz@203.83.249.41
+yinst.package: ports/protobuf-c-0.15-1_04(1352294513)|1398332643|hizibiz@203.83.249.41
+yinst.package: shell_helpers-0.0.3(1370540084)|1402482759|somesh@203.83.249.54
+yinst.package: sys_install-1.4.0(1246319358)|1408346465|ssutrave@openhouse-vm-nat2.cfw-a-gci.corp.ne1.yahoo.com
+yinst.package: twemproxy-0.2.3.4(1377605754)|1402482774|somesh@203.83.249.54
+yinst.package: yahoo_multimode-2.0.2(1335305199)|1398332640|hizibiz@203.83.249.41
+yinst.package: yam_notification-0.0.19(1395818287)|1398332631|hizibiz@203.83.249.41
+yinst.package: yca-0.12.7(1384240914)|1398332644|hizibiz@203.83.249.41
+yinst.package: yca_cert-1.2.13(1391621387)|1398332644|hizibiz@203.83.249.41
+yinst.package: yca_client_certs-0.21.9(1383064836)|1398332640|hizibiz@203.83.249.41
+yinst.package: yca_data-0.3(1191431496)|1398332641|hizibiz@203.83.249.41
+yinst.package: yca_wsca_common-0.14.4(1367314760)|1398332631|hizibiz@203.83.249.41
+yinst.package: ycore-1.33.82(1370448721)|1398332645|hizibiz@203.83.249.41
+yinst.package: ycore_ipv6-1.2.39(1360615448)|1398332641|hizibiz@203.83.249.41
+yinst.package: ycrash-1.5.11(1367428677)|1398332645|hizibiz@203.83.249.41
+yinst.package: ycron-1.11.5(1341866302)|1398332641|hizibiz@203.83.249.41
+yinst.package: yjava_daemon-2.24.194(1384987999)|1398332645|hizibiz@203.83.249.41
+yinst.package: yjava_jdk-1.7.0_51.93(1389737283)|1398332631|hizibiz@203.83.249.41
+yinst.package: yjava_vmwrapper-2.1.7(1348155433)|1398332639|hizibiz@203.83.249.41
+yinst.package: yjava_yca-0.23.218(1381269093)|1398332640|hizibiz@203.83.249.41
+yinst.package: yjava_ysecure-1.15.88(1360021016)|1398332606|hizibiz@203.83.249.41
+yinst.package: yjava_ysecure_agent-1.0.2(1235414709)|1398332640|hizibiz@203.83.249.41
+yinst.package: yjava_ysecure_native-1.15.175(1360017594)|1398332630|hizibiz@203.83.249.41
+yinst.package: ykeydb-2.0.1.56(1372894359)|1398332644|hizibiz@203.83.249.41
+yinst.package: ykeykey-2.1.0.72(1360717285)|1398332645|hizibiz@203.83.249.41
+yinst.package: ykeykeyshared-2.2.0.116(1360710476)|1398332640|hizibiz@203.83.249.41
+yinst.package: ylock-1.4.1.22(1341945205)|1398332640|hizibiz@203.83.249.41
+yinst.package: ylock_kern-1.100.0.20(1344282636)|1398332645|hizibiz@203.83.249.41
+yinst.package: ymonsb-2.9.12_59(1360792665)|1399366698|hizibiz@203.83.249.41
+yinst.package: ymonsb_perl-1.9.18_31(1354718503)|1399366698|hizibiz@203.83.249.41
+yinst.package: yms_agent-0.4.27_5(1378351715)|1399366691|hizibiz@203.83.249.41
+yinst.package: yms_agent_data-20100923.02(1285285211)|1399366698|hizibiz@203.83.249.41
+yinst.package: yms_check_system-1.0.14.15849.21(1381271547)|1399367201|hizibiz@203.83.249.41
+yinst.package: yms_check_ymonsb2-0.5.5(1355150367)|1399367202|hizibiz@203.83.249.41
+yinst.package: yms_collector_client_perl-2.0.20_9(1370623773)|1399366697|hizibiz@203.83.249.41
+yinst.package: yms_errors_lib_perl-2.0.0.16433.0(1386112358)|1399366698|hizibiz@203.83.249.41
+yinst.package: yms_http_client_perl-0.2.5.14804.39(1369292750)|1399366698|hizibiz@203.83.249.41
+yinst.package: yms_syslog_trap-20130603.01_54(1377044054)|1399366698|hizibiz@203.83.249.41
+yinst.package: ynet_db_yahoo-1.16.263(1396264415)|1399366698|hizibiz@203.83.249.41
+yinst.package: ynetdblib-1.14.289(1383255311)|1398332631|hizibiz@203.83.249.41
+yinst.package: ysecure-2.12.77(1366909922)|1398332645|hizibiz@203.83.249.41
+yinst.package: ysniff-1.22.7_11(1355306283)|1399366698|hizibiz@203.83.249.41
+yinst.package: ysys-2.30.40(1352486451)|1398332649|hizibiz@203.83.249.41
+yinst.package: ysysctl-2.2.3(1282945342)|1398332644|hizibiz@203.83.249.41
+yinst.package: yumbase-3.1.1(1335886871)|1408346463|ssutrave@openhouse-vm-nat2.cfw-a-gci.corp.ne1.yahoo.com
+--- /dev/null	2015-02-11 09:57:21.379999968 -0800
++++ var/yinst/settings/answers_cq_impl	2015-01-29 15:07:41.999358828 -0800
+@@ -0,0 +1,8 @@
++lucene_qindex_dir /home/y/share/answers_cq_impl/conf/qIndex
++lucene_wikiindex_dir /home/y/share/answers_cq_impl/conf/wIndex
++model_file /home/y/share/answers_cq_impl/conf/models/v2/no_user_classifier_model.txt
++sherpa_cache 50000
++sherpa_host sherpa-bcp1280.dht.yahoo.com
++sherpa_port 4080
++sherpa_role yahoo.yanswers.perms.prod.sherpa.cq
++sherpa_service com.yahoo.answers.cq.user.impl.SherpaUserServiceImpl
+--- /dev/null	2015-02-11 09:57:21.379999968 -0800
++++ var/yinst/settings/answers_cqsystem	2015-01-29 15:08:05.115543332 -0800
+@@ -0,0 +1,69 @@
++answerDeleteCMSHandler_enabled true
++answerSpamStatusChangeCMSHandler_enabled true
++answerUpdateCMSHandler_enabled true
++answers_amq_consumer_broker_url failover:(nio://amq0.answers.bf1.yahoo.com:61616,nio://amq1.answers.bf1.yahoo.com:61616)
++answers_cqsystem__app_logging_level info
++answers_cqsystem__root_logging_level info
++answers_cqsystem__tracer_enabled info
++autostart on
++cms_answers_fqn queue://yanswers/bf1/answers_cq_events/answers_domain_events
++cms_broker_url http://broker.messaging.bf1.yahoo.com:4080
++cms_cq_events_enabled true
++cms_enabled true
++cms_events_cached_session_size 100
++cq_cms_ycaappid yahoo.yanswers.perms.prod.cq_events.consumer
++cq_spread_redis_hosts_primary localhost
++cq_spread_redis_port_primary 22122
++cq_spread_redis_timeout 500
++cq_threads_max 50
++cq_threads_min 1
++dbwrites_enabled true
++deleteQuestionCMSHandler_enabled true
++deletequestion_handler_enabled false
++dumper_enabled false
++dumper_freq_in_seconds 10
++eventhandlers_amq_connect_credentials yahoo.yanswers.perms.prod.answersevents.consumer
++filter_anscount 30
++filter_lang en
++jedis_max_connections 10
++mtAPI_host http://api-mt.answers.vip.bf1.yahoo.com:4080
++mtAPI_max_connections 500
++mtAPI_max_connections_per_host 200
++mtAPI_timeout_milliseconds 5000
++mtAPI_ycaRole yahoo.yanswers.perms.prod.apiconsumer
++mtDbWrites_enabled true
++mtReadEnabled_enabled true
++newAnswerCMSHandler_enabled true
++newQuestionCMSHandler_enabled true
++newanswer_handler_enabled false
++newquestion_handler_enabled false
++oracle_driverclass yjava.database.jdbc.oracle.KeyDbDriverWrapper
++oracle_initialSize 1
++oracle_maxActive 50
++oracle_maxIdle 5
++oracle_maxWait 1000
++oracle_minIdle 1
++oracle_passwordKey answers.cq
++oracle_pool_activeConnectionCountInterval 10000
++oracle_pool_autoRecreateConnection true
++oracle_pool_autoRecyclingMaxConnections 20
++oracle_pool_autoRecyclingTimeframe 10000
++oracle_pool_enableHighLoadRecycling true
++oracle_pool_enablePermanentRecycling true
++oracle_pool_enableTraceInstance true
++oracle_pool_initialRecyclingMaxConnections 20
++oracle_pool_initialRecyclingTimeframe 10000
++oracle_pool_massiveRecyclePerMillion 250
++oracle_pool_massiveRecycleTime 300000
++oracle_pool_normalRecyclePerMillion 50
++oracle_testOnBorrow false
++oracle_url jdbc:oracle:thin:@(DESCRIPTION = (failover = on) (ADDRESS = (PROTOCOL = TCP)(HOST = ans-db01v.search.bf1.yahoo.com)(PORT = 1530)) (ADDRESS = (PROTOCOL = TCP)(HOST = ans-db02v.search.bf1.yahoo.com)(PORT = 1530)) (ADDRESS = (PROTOCOL = TCP)(HOST = ans-db03v.search.bf1.yahoo.com)(PORT = 1530)) (ADDRESS = (PROTOCOL = TCP)(HOST = ans-db04v.search.bf1.yahoo.com)(PORT = 1530))(ADDRESS = (PROTOCOL = TCP)(HOST = ans-db05v.search.bf1.yahoo.com)(PORT = 1530)) (ADDRESS = (PROTOCOL = TCP)(HOST = ans-db06v.search.bf1.yahoo.com)(PORT = 1530))  (ADDRESS = (PROTOCOL = TCP)(HOST = ans-db07v.search.bf1.yahoo.com)(PORT = 1530)) (ADDRESS = (PROTOCOL = TCP)(HOST = ans-db08v.search.bf1.yahoo.com)(PORT = 1530))  (LOAD_BALANCE = yes) (CONNECT_DATA = (SERVER = DEDICATED) (SERVICE_NAME = ANS_OLTP) (failover_mode = (type = session) (method = basic))))
++oracle_username USER_ANSWERS_WEB_CQ
++oracle_validationQuery select 1 from dual
++path_to_dump_folder 
++profiler_enabled true
++questionuseraction_handler_enabled false
++stateChangeQuestionCMSHandler_enabled true
++statechange_handler_enabled false
++user yahoo
++yam_executor_thread_dump_reset_delay 60
+--- /dev/null	2015-02-11 09:57:21.379999968 -0800
++++ var/yinst/settings/daemontools_y	2015-01-29 15:07:42.037359130 -0800
+@@ -0,0 +1,2 @@
++SVSCAN_USE_LOG true
++autostart on
+--- /dev/null	2015-02-11 09:57:21.379999968 -0800
++++ var/yinst/settings/local_perl_compat	2015-01-29 15:07:41.606355690 -0800
+@@ -0,0 +1 @@
++default_perl 
+--- /dev/null	2015-02-11 09:57:21.379999968 -0800
++++ var/yinst/settings/root	2015-01-29 15:08:05.564546916 -0800
+@@ -0,0 +1 @@
++os_restriction rhel-6.x
+--- /dev/null	2015-02-11 09:57:21.379999968 -0800
++++ var/yinst/settings/twemproxy	2015-01-29 15:07:41.144352002 -0800
+@@ -0,0 +1,11 @@
++auto_eject_hosts false
++autostart on
++groupname redisPrimary
++hash_tag {}
++instances 1
++loglevel 6
++port 22122
++redis true
++shards redcache01.answers.bf1.yahoo.com:6379:aqs01 redcache01.answers.bf1.yahoo.com:6380:aqs02 redcache01.answers.bf1.yahoo.com:6381:aqs03 redcache01.answers.bf1.yahoo.com:6382:aqs04 redcache02.answers.bf1.yahoo.com:6379:aqs11 redcache02.answers.bf1.yahoo.com:6380:aqs12 redcache02.answers.bf1.yahoo.com:6381:aqs13 redcache02.answers.bf1.yahoo.com:6382:aqs14
++stats_port 22222
++timeout 5000
+--- /dev/null	2015-02-11 09:57:21.379999968 -0800
++++ var/yinst/settings/yca_cert	2015-01-29 15:07:41.916358164 -0800
+@@ -0,0 +1,10 @@
++autostart on
++ca_host ca.yca.platform.yahoo.com
++cert_grace_period 345600
++cron_mailto $(YINST_INSTALLER)@yahoo-inc.com
++key_size 512
++master_hostname ''
++mdbm_open_single_arch 0
++platform x86_64-linux-gcc
++use_proxy 0
++use_socks_proxy 0
+--- /dev/null	2015-02-11 09:57:21.379999968 -0800
++++ var/yinst/settings/yca_client_certs	2015-01-29 15:07:42.431362276 -0800
+@@ -0,0 +1,3 @@
++autostart on
++cron_mailto $(YINST_INSTALLER)@yahoo-inc.com
++use_proxy 0
+--- /dev/null	2015-02-11 09:57:21.379999968 -0800
++++ var/yinst/settings/ycrash	2015-01-29 15:07:42.184360304 -0800
+@@ -0,0 +1 @@
++autostart on
+--- /dev/null	2015-02-11 09:57:21.379999968 -0800
++++ var/yinst/settings/ycron	2015-01-29 15:07:41.939358348 -0800
+@@ -0,0 +1 @@
++autostart on
+--- /dev/null	2015-02-11 09:57:21.379999968 -0800
++++ var/yinst/settings/yjava_jdk	2015-01-29 15:07:42.625363824 -0800
+@@ -0,0 +1,6 @@
++HTTP_KEEPALIVE true
++HTTP_MAXCONNECTIONS 5
++JAVA_HOME /home/y/share/yjava_jdk/java
++NETWORKADDRESS_CACHE_NEGATIVE_TTL 10
++NETWORKADDRESS_CACHE_TTL 120
++platform x86_64-rhel4-gcc3
+--- /dev/null	2015-02-11 09:57:21.379999968 -0800
++++ var/yinst/settings/yjava_vmwrapper	2015-01-29 15:07:41.737356736 -0800
+@@ -0,0 +1 @@
++JAVACMD /home/y/bin/java
+--- /dev/null	2015-02-11 09:57:21.379999968 -0800
++++ var/yinst/settings/ykeydb	2015-01-29 15:07:42.439362340 -0800
+@@ -0,0 +1,4 @@
++debug_mode disable
++run_mode YKEYDB_MODE
++use_thread_TLS_ykkhandle disable
++use_thread_locks enable
+--- /dev/null	2015-02-11 09:57:21.379999968 -0800
++++ var/yinst/settings/ykeykey	2015-01-29 15:07:42.634363896 -0800
+@@ -0,0 +1,5 @@
++cache_disabled false
++log_level log_error
++negative_caching enable
++read_timeout 5000
++reconn_timeout 3000
+--- /dev/null	2015-02-11 09:57:21.379999968 -0800
++++ var/yinst/settings/ylock	2015-01-29 15:07:42.074359426 -0800
+@@ -0,0 +1,2 @@
++autostart on
++crontab on
+--- /dev/null	2015-02-11 09:57:21.379999968 -0800
++++ var/yinst/settings/ylock_kern	2015-01-29 15:07:41.969358588 -0800
+@@ -0,0 +1 @@
++autostart on
+--- /dev/null	2015-02-11 09:57:21.379999968 -0800
++++ var/yinst/settings/ymonsb	2015-01-29 15:07:42.586363514 -0800
+@@ -0,0 +1 @@
++autostart on
+--- /dev/null	2015-02-11 09:57:21.379999968 -0800
++++ var/yinst/settings/yms_agent	2015-01-29 15:07:42.299361222 -0800
+@@ -0,0 +1,14 @@
++appid 
++autostart on
++clusters 
++collector 
++debug 
++max_log_length 16777215
++max_logs 100
++port 9898
++ssl_port 9899
++trap_buflen 16384
++trap_cluster YOU_FORGOT_TO_SET_yms_agent.trap_cluster
++trap_config /home/y/conf/yms_syslog_trap
++trap_maxdelay 2
++user ymon
+--- /dev/null	2015-02-11 09:57:21.379999968 -0800
++++ var/yinst/settings/yms_syslog_trap	2015-01-29 15:07:41.532355100 -0800
+@@ -0,0 +1,2 @@
++interval 60
++matches 1
+--- /dev/null	2015-02-11 09:57:21.379999968 -0800
++++ var/yinst/settings/ysysctl	2015-01-29 15:07:41.539355156 -0800
+@@ -0,0 +1 @@
++autostart on

@@ -35,6 +35,7 @@ public class TimelineActivity extends ActionBarActivity implements RetweetDialog
     private TweetCursorAdapter tweetCursorAdapter;
     Cursor tweetCursor;
     private TweetsPageAdapter tweetsPageAdapter;
+    ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +50,7 @@ public class TimelineActivity extends ActionBarActivity implements RetweetDialog
         actionBar.setBackgroundDrawable(new ColorDrawable(0xFF21D3FF));
 
 
-        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+        viewPager = (ViewPager) findViewById(R.id.viewpager);
         tweetsPageAdapter=new TweetsPageAdapter(getSupportFragmentManager());
         viewPager.setAdapter(tweetsPageAdapter);
 
@@ -63,8 +64,8 @@ public class TimelineActivity extends ActionBarActivity implements RetweetDialog
             public void onClick(View v) {
                 Intent i = new Intent(TimelineActivity.this, TweetPostActivity.class);
                 //i.putExtra("personalDetails", myHandle);
-                startActivityForResult(i, REQUEST_RESULT_POST);
-                //startActivity(i);
+                //startActivityForResult(i, REQUEST_RESULT_POST);
+                startActivity(i);
 
             }
         });
@@ -107,19 +108,20 @@ public class TimelineActivity extends ActionBarActivity implements RetweetDialog
     }
 
 
+    /*
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         if(requestCode==REQUEST_RESULT_POST){
             if(resultCode==RESULT_OK){
                 Tweet newTweet = data.getParcelableExtra("newTweet");
-                HomeTimelineFragment fragmentDemo = (HomeTimelineFragment)tweetsPageAdapter.getItem(0);
+                HomeTimelineFragment fragmentDemo = (HomeTimelineFragment)tweetsPageAdapter.
                 fragmentDemo.injectTweet(newTweet);
 
 
             }
         }
-    }
+    }*/
 
 
 
