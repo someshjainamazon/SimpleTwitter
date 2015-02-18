@@ -6,55 +6,41 @@ import android.database.Cursor;
 import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.KeyEvent;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ListView;
+import android.widget.Toast;
 
+import com.astuetz.PagerSlidingTabStrip;
 import com.codepath.apps.mysimpletweets.adapters.TweetCursorAdapter;
-import com.codepath.apps.mysimpletweets.adapters.TweetsTimeLineAdapter;
-import com.codepath.apps.mysimpletweets.listeners.EndlessScrollListener;
+import com.codepath.apps.mysimpletweets.fragments.HomeTimelineFragment;
+import com.codepath.apps.mysimpletweets.fragments.UserMentionFragment;
 import com.codepath.apps.mysimpletweets.models.Tweet;
 import com.codepath.apps.mysimpletweets.models.User;
-import com.loopj.android.http.JsonHttpResponseHandler;
 
-import org.apache.http.Header;
-import org.json.JSONArray;
-import org.json.JSONObject;
+public class TimelineActivity extends ActionBarActivity implements RetweetDialog.RetweetListener{
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class TimelineActivity extends ActionBarActivity {
-
-
-    private TwitterClient twitterClient;
-    private TweetsTimeLineAdapter timelineAdapter;
-    private ArrayList<Tweet> tweetList;
-    private ListView lvTweets;
-    private long max_id;
     private User myHandle;
-    public static final int  REQUEST_RESULT=50;
-    private SwipeRefreshLayout swipeContainer;
+    public static final int  REQUEST_RESULT_POST=50;
+    public static final int  REQUEST_RESULT_PROFILE=100;
+
+
     private TweetCursorAdapter tweetCursorAdapter;
     Cursor tweetCursor;
+    private TweetsPageAdapter tweetsPageAdapter;
+    ViewPager viewPager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline);
-
-        /*ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayShowTitleEnabled(true);
-        actionBar.setTitle("@someshjain1");*/
-
-
 
         final ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowHomeEnabled(false);
@@ -64,207 +50,89 @@ public class TimelineActivity extends ActionBarActivity {
         actionBar.setBackgroundDrawable(new ColorDrawable(0xFF21D3FF));
 
 
+        viewPager = (ViewPager) findViewById(R.id.viewpager);
+        tweetsPageAdapter=new TweetsPageAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(tweetsPageAdapter);
 
 
-        twitterClient = TwitterApp.getRestClient(); // singleton client
-        lvTweets = (ListView) findViewById(R.id.lvTweets);
-
-        tweetList = new ArrayList<Tweet>();
-        timelineAdapter = new TweetsTimeLineAdapter(this, tweetList);
-        lvTweets.setAdapter(timelineAdapter);
-
+        PagerSlidingTabStrip tabStrip = (PagerSlidingTabStrip) findViewById(R.id.tabs);
+        tabStrip.setViewPager(viewPager);
 
         final Button btnPost = (Button) findViewById(R.id.btnCompose);
         btnPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(TimelineActivity.this, TweetPostActivity.class);
-                i.putExtra("personalDetails", myHandle);
-                startActivityForResult(i, REQUEST_RESULT);
+                //i.putExtra("personalDetails", myHandle);
+                //startActivityForResult(i, REQUEST_RESULT_POST);
+                startActivity(i);
 
             }
         });
 
 
-
-
-        /*tweetCursor= Tweet.fetchResultCursor();
-        tweetCursorAdapter = new TweetCursorAdapter(this, tweetCursor);
-        lvTweets.setAdapter(tweetCursorAdapter);*/
-
-
-        getPersonalDetails();
-        populateTimeline();
-
-        lvTweets.setOnScrollListener(new EndlessScrollListener() {
-            @Override
-            public void onLoadMore(int page, int totalItemsCount) {
-                loadMoreData();
-            }
-        });
-
-        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
-        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                populateTimeline();
-
-            }
-        });
-
-        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
-                android.R.color.holo_green_light,
-                android.R.color.holo_orange_light,
-                android.R.color.holo_red_light);
-
-
-    }
-
-    private void getPersonalDetails() {
-        if(isInternetAvailable()) {
-            twitterClient.getMyProfile(new JsonHttpResponseHandler() {
-
-                @Override
-                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-
-                    myHandle = User.fromJson(response);
-                    System.out.println(myHandle.getScreenName());
-                    System.out.println("hello");
-
-                }
-
-                @Override
-                public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                    Log.d("DEBUG", responseString);
-
-                }
-            });
-        }
-
-    }
-
-    private void loadMoreData() {
-
-        if(isInternetAvailable()) {
-            twitterClient.getHomeTimeLineInfinite(new JsonHttpResponseHandler() {
-
-                @Override
-                public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-
-                    timelineAdapter.addAll(Tweet.constructArrayFromJsonTweets(response));
-                    //tweetList = Tweet.constructArrayFromJsonTweets(response);
-                    max_id = tweetList.get(tweetList.size() - 1).getUid();
-                    //tweetCursorAdapter.notifyDataSetChanged();
-                    swipeContainer.setRefreshing(false);
-
-                }
-
-                @Override
-                public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                    List<Tweet> tweets = Tweet.recentTweets();
-
-                    tweetList=Tweet.getTweetArrayList(tweets);
-                    timelineAdapter.addAll(tweetList);
-                    max_id = tweetList.get(tweetList.size() - 1).getUid();
-                    swipeContainer.setRefreshing(false);
-
-
-                }
-            }, max_id, false);
-
-        }else {
-            List<Tweet> tweets = Tweet.recentTweets();
-            System.out.println("hello");
-        }
-    }
-
-    // send api request to get timeline json and then fill list view by creating tweet objects
-    private void populateTimeline() {
-        if(isInternetAvailable()) {
-            twitterClient.getHomeTimeLine(new JsonHttpResponseHandler() {
-
-                @Override
-                public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-
-                    timelineAdapter.addAll(Tweet.constructArrayFromJsonTweets(response));
-                    //tweetList =Tweet.constructArrayFromJsonTweets(response);
-                    //System.out.println("hello");
-                    //tweetCursorAdapter.notifyDataSetChanged();
-                    max_id = tweetList.get(tweetList.size() - 1).getUid();
-                    swipeContainer.setRefreshing(false);
-
-                }
-
-                @Override
-                public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                    List<Tweet> tweets = Tweet.recentTweets();
-
-                    tweetList=Tweet.getTweetArrayList(tweets);
-                    timelineAdapter.addAll(tweetList);
-                    max_id = tweetList.get(tweetList.size() - 1).getUid();
-                    swipeContainer.setRefreshing(false);
-
-
-                }
-            });
-        }
-
-    }
-
-
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_timeline, menu);
-
-
-        final Button btnPost = (Button) findViewById(R.id.btnCompose);
-        btnPost.setOnClickListener(new View.OnClickListener() {
+        final Button btnProfile = (Button) findViewById(R.id.btnProfile);
+        btnProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(TimelineActivity.this, TweetPostActivity.class);
-                i.putExtra("personalDetails", myHandle);
-                startActivityForResult(i, REQUEST_RESULT);
+                Intent i = new Intent(TimelineActivity.this, ProfileActivity.class);
+                startActivity(i);
 
             }
         });
 
 
+        /*Button btnRetweet = (Button)findViewById(R.id.btnRetweet);
 
-        return true;
-    }*/
+        btnRetweet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                retweetDialog();
+            }
+        });*/
+
+
+
+
+
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        /*int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            Intent i = new Intent(this, TweetPostActivity.class);
-            i.putExtra("personalDetails", myHandle);
-            startActivityForResult(i, REQUEST_RESULT);
-
-            return true;
-        }*/
 
         return super.onOptionsItemSelected(item);
     }
 
+
+    /*
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        if(requestCode==REQUEST_RESULT){
+        if(requestCode==REQUEST_RESULT_POST){
             if(resultCode==RESULT_OK){
                 Tweet newTweet = data.getParcelableExtra("newTweet");
-                tweetList.add(0,newTweet);
-                timelineAdapter.notifyDataSetChanged();
+                HomeTimelineFragment fragmentDemo = (HomeTimelineFragment)tweetsPageAdapter.
+                fragmentDemo.injectTweet(newTweet);
+
 
             }
         }
+    }*/
+
+
+
+
+    private void retweetDialog() {
+
+        FragmentManager fm = getSupportFragmentManager();
+        RetweetDialog retweetDialog = RetweetDialog.newInstance();
+        retweetDialog.show(fm, "fragment_retweet");
     }
+
 
     private boolean isInternetAvailable() {
 
@@ -273,5 +141,41 @@ public class TimelineActivity extends ActionBarActivity {
         return networkInfo!=null && networkInfo.isConnectedOrConnecting();
     }
 
+    @Override
+    public void onFinishRetweetDialog(Boolean returnBool) {
+
+        if(returnBool==true){
+            Toast.makeText(this, "retweet happened", Toast.LENGTH_LONG).show();
+        }
+
+    }
+
+    public class TweetsPageAdapter extends FragmentPagerAdapter {
+
+        private String tabTitles[] = {"Home", "Mentions"};
+
+        public TweetsPageAdapter(FragmentManager fm){
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+
+            if(position==0) return new HomeTimelineFragment();
+            else if (position==1) return new UserMentionFragment();
+            else return null;
+
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return tabTitles[position];
+        }
+
+        @Override
+        public int getCount() {
+            return tabTitles.length;
+        }
+    }
 
 }

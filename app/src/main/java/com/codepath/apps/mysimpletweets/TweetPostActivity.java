@@ -30,7 +30,6 @@ public class TweetPostActivity extends ActionBarActivity {
 
 
     private User myHandle;
-
     private ImageView ivMyProfile;
     private TextView tvScreenName;
     private EditText etTweetPost;
@@ -43,11 +42,20 @@ public class TweetPostActivity extends ActionBarActivity {
         setContentView(R.layout.activity_tweet_post);
         twitterClient = TwitterApp.getRestClient(); // singleton client
 
-
-
-
         final ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
+
+
+        twitterClient.getUserInfo(new JsonHttpResponseHandler(){
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                myHandle = User.fromJson(response);
+                populateUser();
+            }
+        });
+
+
         /*actionBar.setDisplayShowHomeEnabled(false);
         actionBar.setDisplayShowTitleEnabled(false);
         actionBar.setDisplayShowCustomEnabled(true);
@@ -56,17 +64,10 @@ public class TweetPostActivity extends ActionBarActivity {
 
 
 
+        //myHandle = getIntent().getParcelableExtra("personalDetails");
 
-        myHandle = getIntent().getParcelableExtra("personalDetails");
-        ivMyProfile=(ImageView)findViewById(R.id.ivMyImage);
-        tvScreenName=(TextView)findViewById(R.id.tvMyUserName);
         etTweetPost = (EditText) findViewById(R.id.etTweet);
         tvNumChars = (TextView) findViewById(R.id.tvCharLimit);
-
-        tvScreenName.setText(myHandle.getScreenName());
-        Picasso.with(TweetPostActivity.this).load(myHandle.getProfileImageUrl()).into(ivMyProfile);
-
-
 
 
 
@@ -88,6 +89,14 @@ public class TweetPostActivity extends ActionBarActivity {
         });
 
 
+
+    }
+
+    private void populateUser() {
+        ivMyProfile=(ImageView)findViewById(R.id.ivMyImage);
+        tvScreenName=(TextView)findViewById(R.id.tvMyUserName);
+        tvScreenName.setText(myHandle.getScreenName());
+        Picasso.with(TweetPostActivity.this).load(myHandle.getProfileImageUrl()).into(ivMyProfile);
 
     }
 

@@ -38,6 +38,18 @@
         android:layout_alignParentEnd="true"
         android:layout_alignBottom="@+id/tvHomeTitle" />
 
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnProfile"
+        android:paddingRight="10sp"
+        android:background="@drawable/ic_profile"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/btnCompose"
+        android:onClick="onClickProfile"
+        android:layout_toStartOf="@+id/btnCompose" />
+
 
     <!--
     <FrameLayout

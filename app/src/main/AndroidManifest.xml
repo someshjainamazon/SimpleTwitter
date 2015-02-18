@@ -13,7 +13,9 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
-    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" /> <!-- <android:uses-permission android:name="android.permission.READ_PHONE_STATE" /> -->
+    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    <!-- <android:uses-permission android:name="android.permission.READ_PHONE_STATE" /> -->
     <application
         android:name=".TwitterApp"
         android:allowBackup="true"
@@ -54,6 +56,10 @@
         <activity
             android:name=".TweetPostActivity"
             android:label="@string/title_activity_tweet_post" >
+        </activity>
+        <activity
+            android:name=".ProfileActivity"
+            android:label="@string/title_activity_profile" >
         </activity>
     </application>
 
